@@ -2,46 +2,46 @@
   "project_name": "supplier-invoice-loader",
   "description": "Supplier Invoice Loader v2.0 - Automated invoice processing (refactored)",
   "repository": "https://github.com/rauschiccsk/supplier-invoice-loader",
-  "generated_at": "2025-11-14T15:28:34.595100",
-  "commit_sha": "0191887158d45d9aa0fc13a7702aa5d8d5d918b8",
-  "cache_buster": "0191887158d45d9aa0fc13a7702aa5d8d5d918b8",
-  "cache_version": "0191887158d4",
-  "base_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8",
+  "generated_at": "2025-11-14T16:10:31.137756",
+  "commit_sha": "89ff02567eed99f07e49c11b6c2223c2f3779e4c",
+  "cache_buster": "89ff02567eed99f07e49c11b6c2223c2f3779e4c",
+  "cache_version": "89ff02567eed",
+  "base_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c",
   "quick_access": {
     "init_files": [
       {
         "name": "docs/INIT_PROMPT_NEW_CHAT.md",
         "description": "Init prompt for new session",
-        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/INIT_PROMPT_NEW_CHAT.md?v=0191887158d4"
+        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/INIT_PROMPT_NEW_CHAT.md?v=89ff02567eed"
       },
       {
         "name": "docs/SESSION_NOTES.md",
         "description": "Unified session history",
-        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/SESSION_NOTES.md?v=0191887158d4"
+        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/SESSION_NOTES.md?v=89ff02567eed"
       }
     ],
     "core_modules": [
       {
         "name": "main.py",
         "description": "Application entry point",
-        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/main.py?v=0191887158d4"
+        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/main.py?v=89ff02567eed"
       },
       {
         "name": "src/database/database.py",
         "description": "Database client",
-        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/database/database.py?v=0191887158d4"
+        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/database/database.py?v=89ff02567eed"
       },
       {
         "name": "src/extractors/ls_extractor.py",
         "description": "L&Š PDF extractor",
-        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/extractors/ls_extractor.py?v=0191887158d4"
+        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/extractors/ls_extractor.py?v=89ff02567eed"
       }
     ],
     "configuration": [
       {
         "name": "config/config.yaml",
         "description": "Main configuration",
-        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/config/config.yaml?v=0191887158d4"
+        "url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/config/config.yaml?v=89ff02567eed"
       }
     ]
   },
@@ -96,7 +96,7 @@
   "files": [
     {
       "path": "src/api/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/api/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/api/__init__.py?v=89ff02567eed",
       "size": 25,
       "extension": ".py",
       "name": "__init__.py",
@@ -105,7 +105,7 @@
     },
     {
       "path": "src/api/models.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/api/models.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/api/models.py?v=89ff02567eed",
       "size": 1583,
       "extension": ".py",
       "name": "models.py",
@@ -114,7 +114,7 @@
     },
     {
       "path": "src/business/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/business/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/business/__init__.py?v=89ff02567eed",
       "size": 27,
       "extension": ".py",
       "name": "__init__.py",
@@ -123,7 +123,7 @@
     },
     {
       "path": "src/business/isdoc_service.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/business/isdoc_service.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/business/isdoc_service.py?v=89ff02567eed",
       "size": 15353,
       "extension": ".py",
       "name": "isdoc_service.py",
@@ -132,7 +132,7 @@
     },
     {
       "path": ".coverage",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/.coverage?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/.coverage?v=89ff02567eed",
       "size": 53248,
       "extension": "",
       "name": ".coverage",
@@ -141,7 +141,7 @@
     },
     {
       "path": "README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/README.md?v=89ff02567eed",
       "size": 8033,
       "extension": ".md",
       "name": "README.md",
@@ -150,7 +150,7 @@
     },
     {
       "path": "config/config.template.yaml",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/config/config.template.yaml?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/config/config.template.yaml?v=89ff02567eed",
       "size": 579,
       "extension": ".yaml",
       "name": "config.template.yaml",
@@ -159,7 +159,7 @@
     },
     {
       "path": "config/config_customer.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/config/config_customer.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/config/config_customer.py?v=89ff02567eed",
       "size": 1728,
       "extension": ".py",
       "name": "config_customer.py",
@@ -168,7 +168,7 @@
     },
     {
       "path": "config/config_template.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/config/config_template.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/config/config_template.py?v=89ff02567eed",
       "size": 13245,
       "extension": ".py",
       "name": "config_template.py",
@@ -177,7 +177,7 @@
     },
     {
       "path": "coverage.xml",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/coverage.xml?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/coverage.xml?v=89ff02567eed",
       "size": 36028,
       "extension": ".xml",
       "name": "coverage.xml",
@@ -186,7 +186,7 @@
     },
     {
       "path": "htmlcov/class_index.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/class_index.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/class_index.html?v=89ff02567eed",
       "size": 17101,
       "extension": ".html",
       "name": "class_index.html",
@@ -195,7 +195,7 @@
     },
     {
       "path": "htmlcov/coverage_html_cb_437fc316.js",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/coverage_html_cb_437fc316.js?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/coverage_html_cb_437fc316.js?v=89ff02567eed",
       "size": 26209,
       "extension": ".js",
       "name": "coverage_html_cb_437fc316.js",
@@ -204,7 +204,7 @@
     },
     {
       "path": "htmlcov/favicon_32_cb_58284776.png",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/favicon_32_cb_58284776.png?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/favicon_32_cb_58284776.png?v=89ff02567eed",
       "size": 1732,
       "extension": ".png",
       "name": "favicon_32_cb_58284776.png",
@@ -213,7 +213,7 @@
     },
     {
       "path": "htmlcov/function_index.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/function_index.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/function_index.html?v=89ff02567eed",
       "size": 46488,
       "extension": ".html",
       "name": "function_index.html",
@@ -222,7 +222,7 @@
     },
     {
       "path": "htmlcov/index.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/index.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/index.html?v=89ff02567eed",
       "size": 9275,
       "extension": ".html",
       "name": "index.html",
@@ -231,7 +231,7 @@
     },
     {
       "path": "htmlcov/keybd_closed_cb_ce680311.png",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/keybd_closed_cb_ce680311.png?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/keybd_closed_cb_ce680311.png?v=89ff02567eed",
       "size": 9004,
       "extension": ".png",
       "name": "keybd_closed_cb_ce680311.png",
@@ -240,7 +240,7 @@
     },
     {
       "path": "htmlcov/status.json",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/status.json?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/status.json?v=89ff02567eed",
       "size": 5600,
       "extension": ".json",
       "name": "status.json",
@@ -249,7 +249,7 @@
     },
     {
       "path": "htmlcov/style_cb_e87a9960.css",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/style_cb_e87a9960.css?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/style_cb_e87a9960.css?v=89ff02567eed",
       "size": 16022,
       "extension": ".css",
       "name": "style_cb_e87a9960.css",
@@ -258,7 +258,7 @@
     },
     {
       "path": "htmlcov/z_04e2950766bc0f15___init___py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_04e2950766bc0f15___init___py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_04e2950766bc0f15___init___py.html?v=89ff02567eed",
       "size": 4718,
       "extension": ".html",
       "name": "z_04e2950766bc0f15___init___py.html",
@@ -267,7 +267,7 @@
     },
     {
       "path": "htmlcov/z_04e2950766bc0f15_models_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_04e2950766bc0f15_models_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_04e2950766bc0f15_models_py.html?v=89ff02567eed",
       "size": 17262,
       "extension": ".html",
       "name": "z_04e2950766bc0f15_models_py.html",
@@ -276,7 +276,7 @@
     },
     {
       "path": "htmlcov/z_145eef247bfb46b6___init___py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_145eef247bfb46b6___init___py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_145eef247bfb46b6___init___py.html?v=89ff02567eed",
       "size": 4657,
       "extension": ".html",
       "name": "z_145eef247bfb46b6___init___py.html",
@@ -285,7 +285,7 @@
     },
     {
       "path": "htmlcov/z_6156a86a215061be___init___py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_6156a86a215061be___init___py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_6156a86a215061be___init___py.html?v=89ff02567eed",
       "size": 4726,
       "extension": ".html",
       "name": "z_6156a86a215061be___init___py.html",
@@ -294,7 +294,7 @@
     },
     {
       "path": "htmlcov/z_6156a86a215061be_config_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_6156a86a215061be_config_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_6156a86a215061be_config_py.html?v=89ff02567eed",
       "size": 6701,
       "extension": ".html",
       "name": "z_6156a86a215061be_config_py.html",
@@ -303,7 +303,7 @@
     },
     {
       "path": "htmlcov/z_6156a86a215061be_env_loader_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_6156a86a215061be_env_loader_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_6156a86a215061be_env_loader_py.html?v=89ff02567eed",
       "size": 26720,
       "extension": ".html",
       "name": "z_6156a86a215061be_env_loader_py.html",
@@ -312,7 +312,7 @@
     },
     {
       "path": "htmlcov/z_6156a86a215061be_monitoring_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_6156a86a215061be_monitoring_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_6156a86a215061be_monitoring_py.html?v=89ff02567eed",
       "size": 150050,
       "extension": ".html",
       "name": "z_6156a86a215061be_monitoring_py.html",
@@ -321,7 +321,7 @@
     },
     {
       "path": "htmlcov/z_6156a86a215061be_notifications_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_6156a86a215061be_notifications_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_6156a86a215061be_notifications_py.html?v=89ff02567eed",
       "size": 131759,
       "extension": ".html",
       "name": "z_6156a86a215061be_notifications_py.html",
@@ -330,7 +330,7 @@
     },
     {
       "path": "htmlcov/z_67d056e3707ef46d___init___py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_67d056e3707ef46d___init___py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_67d056e3707ef46d___init___py.html?v=89ff02567eed",
       "size": 4740,
       "extension": ".html",
       "name": "z_67d056e3707ef46d___init___py.html",
@@ -339,7 +339,7 @@
     },
     {
       "path": "htmlcov/z_7b89ceae992477cc___init___py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_7b89ceae992477cc___init___py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_7b89ceae992477cc___init___py.html?v=89ff02567eed",
       "size": 4749,
       "extension": ".html",
       "name": "z_7b89ceae992477cc___init___py.html",
@@ -348,7 +348,7 @@
     },
     {
       "path": "htmlcov/z_7b89ceae992477cc_base_extractor_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_7b89ceae992477cc_base_extractor_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_7b89ceae992477cc_base_extractor_py.html?v=89ff02567eed",
       "size": 15407,
       "extension": ".html",
       "name": "z_7b89ceae992477cc_base_extractor_py.html",
@@ -357,7 +357,7 @@
     },
     {
       "path": "htmlcov/z_7b89ceae992477cc_generic_extractor_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_7b89ceae992477cc_generic_extractor_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_7b89ceae992477cc_generic_extractor_py.html?v=89ff02567eed",
       "size": 15560,
       "extension": ".html",
       "name": "z_7b89ceae992477cc_generic_extractor_py.html",
@@ -366,7 +366,7 @@
     },
     {
       "path": "htmlcov/z_7b89ceae992477cc_ls_extractor_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_7b89ceae992477cc_ls_extractor_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_7b89ceae992477cc_ls_extractor_py.html?v=89ff02567eed",
       "size": 92627,
       "extension": ".html",
       "name": "z_7b89ceae992477cc_ls_extractor_py.html",
@@ -375,7 +375,7 @@
     },
     {
       "path": "htmlcov/z_999a42925c104bf3___init___py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_999a42925c104bf3___init___py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_999a42925c104bf3___init___py.html?v=89ff02567eed",
       "size": 4740,
       "extension": ".html",
       "name": "z_999a42925c104bf3___init___py.html",
@@ -384,7 +384,7 @@
     },
     {
       "path": "htmlcov/z_999a42925c104bf3_isdoc_service_py.html",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/htmlcov/z_999a42925c104bf3_isdoc_service_py.html?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/htmlcov/z_999a42925c104bf3_isdoc_service_py.html?v=89ff02567eed",
       "size": 118729,
       "extension": ".html",
       "name": "z_999a42925c104bf3_isdoc_service_py.html",
@@ -393,7 +393,7 @@
     },
     {
       "path": "pyproject.toml",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/pyproject.toml?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/pyproject.toml?v=89ff02567eed",
       "size": 5224,
       "extension": ".toml",
       "name": "pyproject.toml",
@@ -402,7 +402,7 @@
     },
     {
       "path": "requirements-dev.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/requirements-dev.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/requirements-dev.txt?v=89ff02567eed",
       "size": 1661,
       "extension": ".txt",
       "name": "requirements-dev.txt",
@@ -411,7 +411,7 @@
     },
     {
       "path": "requirements.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/requirements.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/requirements.txt?v=89ff02567eed",
       "size": 4323,
       "extension": ".txt",
       "name": "requirements.txt",
@@ -420,7 +420,7 @@
     },
     {
       "path": "supplier_invoice_loader.egg-info/PKG-INFO",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/supplier_invoice_loader.egg-info/PKG-INFO?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/supplier_invoice_loader.egg-info/PKG-INFO?v=89ff02567eed",
       "size": 10072,
       "extension": "",
       "name": "PKG-INFO",
@@ -429,7 +429,7 @@
     },
     {
       "path": "supplier_invoice_loader.egg-info/SOURCES.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/supplier_invoice_loader.egg-info/SOURCES.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/supplier_invoice_loader.egg-info/SOURCES.txt?v=89ff02567eed",
       "size": 693,
       "extension": ".txt",
       "name": "SOURCES.txt",
@@ -438,7 +438,7 @@
     },
     {
       "path": "supplier_invoice_loader.egg-info/dependency_links.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/supplier_invoice_loader.egg-info/dependency_links.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/supplier_invoice_loader.egg-info/dependency_links.txt?v=89ff02567eed",
       "size": 1,
       "extension": ".txt",
       "name": "dependency_links.txt",
@@ -447,7 +447,7 @@
     },
     {
       "path": "supplier_invoice_loader.egg-info/requires.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/supplier_invoice_loader.egg-info/requires.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/supplier_invoice_loader.egg-info/requires.txt?v=89ff02567eed",
       "size": 418,
       "extension": ".txt",
       "name": "requires.txt",
@@ -456,7 +456,7 @@
     },
     {
       "path": "supplier_invoice_loader.egg-info/top_level.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/supplier_invoice_loader.egg-info/top_level.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/supplier_invoice_loader.egg-info/top_level.txt?v=89ff02567eed",
       "size": 4,
       "extension": ".txt",
       "name": "top_level.txt",
@@ -465,7 +465,7 @@
     },
     {
       "path": "deploy/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/README.md?v=89ff02567eed",
       "size": 57,
       "extension": ".md",
       "name": "README.md",
@@ -474,7 +474,7 @@
     },
     {
       "path": "deploy/build_package.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/build_package.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/build_package.py?v=89ff02567eed",
       "size": 18707,
       "extension": ".py",
       "name": "build_package.py",
@@ -483,7 +483,7 @@
     },
     {
       "path": "deploy/deploy.bat",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/deploy.bat?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/deploy.bat?v=89ff02567eed",
       "size": 6134,
       "extension": ".bat",
       "name": "deploy.bat",
@@ -492,7 +492,7 @@
     },
     {
       "path": "deploy/deploy.sh",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/deploy.sh?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/deploy.sh?v=89ff02567eed",
       "size": 15718,
       "extension": ".sh",
       "name": "deploy.sh",
@@ -501,7 +501,7 @@
     },
     {
       "path": "deploy/run_smoke_tests.bat",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/run_smoke_tests.bat?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/run_smoke_tests.bat?v=89ff02567eed",
       "size": 6592,
       "extension": ".bat",
       "name": "run_smoke_tests.bat",
@@ -510,7 +510,7 @@
     },
     {
       "path": "deploy/service_uninstaller.bat",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/service_uninstaller.bat?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/service_uninstaller.bat?v=89ff02567eed",
       "size": 2261,
       "extension": ".bat",
       "name": "service_uninstaller.bat",
@@ -519,7 +519,7 @@
     },
     {
       "path": "deploy/test-deployment.ps1",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/test-deployment.ps1?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/test-deployment.ps1?v=89ff02567eed",
       "size": 10777,
       "extension": ".ps1",
       "name": "test-deployment.ps1",
@@ -528,7 +528,7 @@
     },
     {
       "path": "deploy/upgrade_dependencies.bat",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/deploy/upgrade_dependencies.bat?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/deploy/upgrade_dependencies.bat?v=89ff02567eed",
       "size": 2040,
       "extension": ".bat",
       "name": "upgrade_dependencies.bat",
@@ -537,25 +537,25 @@
     },
     {
       "path": "docs/INIT_PROMPT_NEW_CHAT.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/INIT_PROMPT_NEW_CHAT.md?v=0191887158d4",
-      "size": 8516,
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/INIT_PROMPT_NEW_CHAT.md?v=89ff02567eed",
+      "size": 10636,
       "extension": ".md",
       "name": "INIT_PROMPT_NEW_CHAT.md",
       "category": "documentation",
-      "modified": "2025-11-14 09:53:41"
+      "modified": "2025-11-14 16:08:40"
     },
     {
       "path": "docs/SESSION_NOTES.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/SESSION_NOTES.md?v=0191887158d4",
-      "size": 7372,
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/SESSION_NOTES.md?v=89ff02567eed",
+      "size": 12771,
       "extension": ".md",
       "name": "SESSION_NOTES.md",
       "category": "documentation",
-      "modified": "2025-11-14 09:53:08"
+      "modified": "2025-11-14 16:08:21"
     },
     {
       "path": "docs/architecture/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/architecture/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/architecture/README.md?v=89ff02567eed",
       "size": 78,
       "extension": ".md",
       "name": "README.md",
@@ -564,7 +564,7 @@
     },
     {
       "path": "docs/decisions/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/decisions/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/decisions/README.md?v=89ff02567eed",
       "size": 97,
       "extension": ".md",
       "name": "README.md",
@@ -573,7 +573,7 @@
     },
     {
       "path": "docs/deployment/DEPLOYMENT_CHECKLIST.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/deployment/DEPLOYMENT_CHECKLIST.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/deployment/DEPLOYMENT_CHECKLIST.md?v=89ff02567eed",
       "size": 12466,
       "extension": ".md",
       "name": "DEPLOYMENT_CHECKLIST.md",
@@ -582,7 +582,7 @@
     },
     {
       "path": "docs/deployment/INSTALL_CUSTOMER.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/deployment/INSTALL_CUSTOMER.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/deployment/INSTALL_CUSTOMER.md?v=89ff02567eed",
       "size": 2091,
       "extension": ".md",
       "name": "INSTALL_CUSTOMER.md",
@@ -591,7 +591,7 @@
     },
     {
       "path": "docs/deployment/RELEASE_NOTES_v2.0.0.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/deployment/RELEASE_NOTES_v2.0.0.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/deployment/RELEASE_NOTES_v2.0.0.md?v=89ff02567eed",
       "size": 9504,
       "extension": ".md",
       "name": "RELEASE_NOTES_v2.0.0.md",
@@ -600,7 +600,7 @@
     },
     {
       "path": "docs/deployment/WINDOWS_SERVICE_GUIDE.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/deployment/WINDOWS_SERVICE_GUIDE.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/deployment/WINDOWS_SERVICE_GUIDE.md?v=89ff02567eed",
       "size": 9148,
       "extension": ".md",
       "name": "WINDOWS_SERVICE_GUIDE.md",
@@ -609,7 +609,7 @@
     },
     {
       "path": "docs/guides/CUSTOMER_TESTING_CHECKLIST.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/guides/CUSTOMER_TESTING_CHECKLIST.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/guides/CUSTOMER_TESTING_CHECKLIST.md?v=89ff02567eed",
       "size": 10871,
       "extension": ".md",
       "name": "CUSTOMER_TESTING_CHECKLIST.md",
@@ -618,7 +618,7 @@
     },
     {
       "path": "docs/guides/DEVELOPMENT.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/guides/DEVELOPMENT.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/guides/DEVELOPMENT.md?v=89ff02567eed",
       "size": 13648,
       "extension": ".md",
       "name": "DEVELOPMENT.md",
@@ -627,7 +627,7 @@
     },
     {
       "path": "docs/guides/N8N_WORKFLOW_SETUP.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/guides/N8N_WORKFLOW_SETUP.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/guides/N8N_WORKFLOW_SETUP.md?v=89ff02567eed",
       "size": 17256,
       "extension": ".md",
       "name": "N8N_WORKFLOW_SETUP.md",
@@ -636,7 +636,7 @@
     },
     {
       "path": "docs/guides/PYTHON_SETUP.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/guides/PYTHON_SETUP.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/guides/PYTHON_SETUP.md?v=89ff02567eed",
       "size": 16086,
       "extension": ".md",
       "name": "PYTHON_SETUP.md",
@@ -645,7 +645,7 @@
     },
     {
       "path": "docs/guides/SECURITY.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/guides/SECURITY.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/guides/SECURITY.md?v=89ff02567eed",
       "size": 14478,
       "extension": ".md",
       "name": "SECURITY.md",
@@ -654,7 +654,7 @@
     },
     {
       "path": "docs/guides/TESTING.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/guides/TESTING.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/guides/TESTING.md?v=89ff02567eed",
       "size": 12587,
       "extension": ".md",
       "name": "TESTING.md",
@@ -663,7 +663,7 @@
     },
     {
       "path": "docs/operations/EMAIL_ALERTING.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/operations/EMAIL_ALERTING.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/operations/EMAIL_ALERTING.md?v=89ff02567eed",
       "size": 13181,
       "extension": ".md",
       "name": "EMAIL_ALERTING.md",
@@ -672,7 +672,7 @@
     },
     {
       "path": "docs/operations/MONITORING.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/operations/MONITORING.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/operations/MONITORING.md?v=89ff02567eed",
       "size": 16920,
       "extension": ".md",
       "name": "MONITORING.md",
@@ -681,7 +681,7 @@
     },
     {
       "path": "docs/operations/TROUBLESHOOTING.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/operations/TROUBLESHOOTING.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/operations/TROUBLESHOOTING.md?v=89ff02567eed",
       "size": 26948,
       "extension": ".md",
       "name": "TROUBLESHOOTING.md",
@@ -690,7 +690,7 @@
     },
     {
       "path": "docs/operations/USER_GUIDE.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/operations/USER_GUIDE.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/operations/USER_GUIDE.md?v=89ff02567eed",
       "size": 6577,
       "extension": ".md",
       "name": "USER_GUIDE.md",
@@ -699,16 +699,16 @@
     },
     {
       "path": "docs/project_file_access.json",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/project_file_access.json?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/project_file_access.json?v=89ff02567eed",
       "size": 47193,
       "extension": ".json",
       "name": "project_file_access.json",
       "category": "documentation",
-      "modified": "2025-11-14 15:28:26"
+      "modified": "2025-11-14 15:28:34"
     },
     {
       "path": "docs/sessions/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/sessions/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/sessions/README.md?v=89ff02567eed",
       "size": 53,
       "extension": ".md",
       "name": "README.md",
@@ -717,7 +717,7 @@
     },
     {
       "path": "docs/stories/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/stories/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/stories/README.md?v=89ff02567eed",
       "size": 67,
       "extension": ".md",
       "name": "README.md",
@@ -726,7 +726,7 @@
     },
     {
       "path": "docs/troubleshooting/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/docs/troubleshooting/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/docs/troubleshooting/README.md?v=89ff02567eed",
       "size": 57,
       "extension": ".md",
       "name": "README.md",
@@ -735,7 +735,7 @@
     },
     {
       "path": "src/extractors/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/extractors/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/extractors/__init__.py?v=89ff02567eed",
       "size": 26,
       "extension": ".py",
       "name": "__init__.py",
@@ -744,7 +744,7 @@
     },
     {
       "path": "src/extractors/base_extractor.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/extractors/base_extractor.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/extractors/base_extractor.py?v=89ff02567eed",
       "size": 1201,
       "extension": ".py",
       "name": "base_extractor.py",
@@ -753,7 +753,7 @@
     },
     {
       "path": "src/extractors/generic_extractor.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/extractors/generic_extractor.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/extractors/generic_extractor.py?v=89ff02567eed",
       "size": 1404,
       "extension": ".py",
       "name": "generic_extractor.py",
@@ -762,7 +762,7 @@
     },
     {
       "path": "src/extractors/ls_extractor.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/extractors/ls_extractor.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/extractors/ls_extractor.py?v=89ff02567eed",
       "size": 12598,
       "extension": ".py",
       "name": "ls_extractor.py",
@@ -771,7 +771,7 @@
     },
     {
       "path": "n8n-workflows/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/n8n-workflows/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/n8n-workflows/README.md?v=89ff02567eed",
       "size": 67,
       "extension": ".md",
       "name": "README.md",
@@ -780,7 +780,7 @@
     },
     {
       "path": "n8n-workflows/n8n-SupplierInvoiceEmailLoader.json",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/n8n-workflows/n8n-SupplierInvoiceEmailLoader.json?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/n8n-workflows/n8n-SupplierInvoiceEmailLoader.json?v=89ff02567eed",
       "size": 7598,
       "extension": ".json",
       "name": "n8n-SupplierInvoiceEmailLoader.json",
@@ -789,7 +789,7 @@
     },
     {
       "path": "n8n-workflows/template.json",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/n8n-workflows/template.json?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/n8n-workflows/template.json?v=89ff02567eed",
       "size": 7600,
       "extension": ".json",
       "name": "template.json",
@@ -798,7 +798,7 @@
     },
     {
       "path": "src/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/__init__.py?v=89ff02567eed",
       "size": 18,
       "extension": ".py",
       "name": "__init__.py",
@@ -807,7 +807,7 @@
     },
     {
       "path": "src/supplier_invoice_loader.egg-info/PKG-INFO",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/supplier_invoice_loader.egg-info/PKG-INFO?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/supplier_invoice_loader.egg-info/PKG-INFO?v=89ff02567eed",
       "size": 10028,
       "extension": "",
       "name": "PKG-INFO",
@@ -816,7 +816,7 @@
     },
     {
       "path": "src/supplier_invoice_loader.egg-info/SOURCES.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/supplier_invoice_loader.egg-info/SOURCES.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/supplier_invoice_loader.egg-info/SOURCES.txt?v=89ff02567eed",
       "size": 681,
       "extension": ".txt",
       "name": "SOURCES.txt",
@@ -825,7 +825,7 @@
     },
     {
       "path": "src/supplier_invoice_loader.egg-info/dependency_links.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/supplier_invoice_loader.egg-info/dependency_links.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/supplier_invoice_loader.egg-info/dependency_links.txt?v=89ff02567eed",
       "size": 1,
       "extension": ".txt",
       "name": "dependency_links.txt",
@@ -834,7 +834,7 @@
     },
     {
       "path": "src/supplier_invoice_loader.egg-info/requires.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/supplier_invoice_loader.egg-info/requires.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/supplier_invoice_loader.egg-info/requires.txt?v=89ff02567eed",
       "size": 391,
       "extension": ".txt",
       "name": "requires.txt",
@@ -843,7 +843,7 @@
     },
     {
       "path": "src/supplier_invoice_loader.egg-info/top_level.txt",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/supplier_invoice_loader.egg-info/top_level.txt?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/supplier_invoice_loader.egg-info/top_level.txt?v=89ff02567eed",
       "size": 48,
       "extension": ".txt",
       "name": "top_level.txt",
@@ -852,7 +852,7 @@
     },
     {
       "path": "main.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/main.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/main.py?v=89ff02567eed",
       "size": 1192,
       "extension": ".py",
       "name": "main.py",
@@ -861,7 +861,7 @@
     },
     {
       "path": "scripts/generate_project_access.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/scripts/generate_project_access.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/scripts/generate_project_access.py?v=89ff02567eed",
       "size": 8663,
       "extension": ".py",
       "name": "generate_project_access.py",
@@ -870,7 +870,7 @@
     },
     {
       "path": "scripts/service_installer.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/scripts/service_installer.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/scripts/service_installer.py?v=89ff02567eed",
       "size": 25132,
       "extension": ".py",
       "name": "service_installer.py",
@@ -879,7 +879,7 @@
     },
     {
       "path": "scripts/verify_installation.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/scripts/verify_installation.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/scripts/verify_installation.py?v=89ff02567eed",
       "size": 6523,
       "extension": ".py",
       "name": "verify_installation.py",
@@ -888,7 +888,7 @@
     },
     {
       "path": "tests/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/README.md?v=89ff02567eed",
       "size": 241,
       "extension": ".md",
       "name": "README.md",
@@ -897,7 +897,7 @@
     },
     {
       "path": "tests/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/__init__.py?v=89ff02567eed",
       "size": 18,
       "extension": ".py",
       "name": "__init__.py",
@@ -906,7 +906,7 @@
     },
     {
       "path": "tests/conftest.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/conftest.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/conftest.py?v=89ff02567eed",
       "size": 5806,
       "extension": ".py",
       "name": "conftest.py",
@@ -915,7 +915,7 @@
     },
     {
       "path": "tests/integration/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/integration/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/integration/__init__.py?v=89ff02567eed",
       "size": 18,
       "extension": ".py",
       "name": "__init__.py",
@@ -924,7 +924,7 @@
     },
     {
       "path": "tests/samples/README.md",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/samples/README.md?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/samples/README.md?v=89ff02567eed",
       "size": 3789,
       "extension": ".md",
       "name": "README.md",
@@ -933,7 +933,7 @@
     },
     {
       "path": "tests/unit/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/__init__.py?v=89ff02567eed",
       "size": 18,
       "extension": ".py",
       "name": "__init__.py",
@@ -942,7 +942,7 @@
     },
     {
       "path": "tests/unit/test_api.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_api.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_api.py?v=89ff02567eed",
       "size": 7048,
       "extension": ".py",
       "name": "test_api.py",
@@ -951,7 +951,7 @@
     },
     {
       "path": "tests/unit/test_batch_extraction.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_batch_extraction.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_batch_extraction.py?v=89ff02567eed",
       "size": 2835,
       "extension": ".py",
       "name": "test_batch_extraction.py",
@@ -960,7 +960,7 @@
     },
     {
       "path": "tests/unit/test_config.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_config.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_config.py?v=89ff02567eed",
       "size": 6040,
       "extension": ".py",
       "name": "test_config.py",
@@ -969,7 +969,7 @@
     },
     {
       "path": "tests/unit/test_extraction.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_extraction.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_extraction.py?v=89ff02567eed",
       "size": 2133,
       "extension": ".py",
       "name": "test_extraction.py",
@@ -978,7 +978,7 @@
     },
     {
       "path": "tests/unit/test_import.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_import.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_import.py?v=89ff02567eed",
       "size": 523,
       "extension": ".py",
       "name": "test_import.py",
@@ -987,7 +987,7 @@
     },
     {
       "path": "tests/unit/test_isdoc.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_isdoc.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_isdoc.py?v=89ff02567eed",
       "size": 1452,
       "extension": ".py",
       "name": "test_isdoc.py",
@@ -996,7 +996,7 @@
     },
     {
       "path": "tests/unit/test_monitoring.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_monitoring.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_monitoring.py?v=89ff02567eed",
       "size": 8927,
       "extension": ".py",
       "name": "test_monitoring.py",
@@ -1005,7 +1005,7 @@
     },
     {
       "path": "tests/unit/test_notifications.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/tests/unit/test_notifications.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/tests/unit/test_notifications.py?v=89ff02567eed",
       "size": 8932,
       "extension": ".py",
       "name": "test_notifications.py",
@@ -1014,7 +1014,7 @@
     },
     {
       "path": "src/utils/__init__.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/utils/__init__.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/utils/__init__.py?v=89ff02567eed",
       "size": 21,
       "extension": ".py",
       "name": "__init__.py",
@@ -1023,7 +1023,7 @@
     },
     {
       "path": "src/utils/config.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/utils/config.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/utils/config.py?v=89ff02567eed",
       "size": 262,
       "extension": ".py",
       "name": "config.py",
@@ -1032,7 +1032,7 @@
     },
     {
       "path": "src/utils/env_loader.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/utils/env_loader.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/utils/env_loader.py?v=89ff02567eed",
       "size": 2621,
       "extension": ".py",
       "name": "env_loader.py",
@@ -1041,7 +1041,7 @@
     },
     {
       "path": "src/utils/monitoring.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/utils/monitoring.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/utils/monitoring.py?v=89ff02567eed",
       "size": 18835,
       "extension": ".py",
       "name": "monitoring.py",
@@ -1050,7 +1050,7 @@
     },
     {
       "path": "src/utils/notifications.py",
-      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/0191887158d45d9aa0fc13a7702aa5d8d5d918b8/src/utils/notifications.py?v=0191887158d4",
+      "raw_url": "https://raw.githubusercontent.com/rauschiccsk/supplier-invoice-loader/89ff02567eed99f07e49c11b6c2223c2f3779e4c/src/utils/notifications.py?v=89ff02567eed",
       "size": 20701,
       "extension": ".py",
       "name": "notifications.py",
