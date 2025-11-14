@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # Virtual Environment
 venv/
@@ -32,12 +33,16 @@ env/
 *.swp
 *.swo
 *~
+.pycharm/
 
 # Testing
 .pytest_cache/
 .coverage
 htmlcov/
 .tox/
+coverage.xml
+*.cover
+.hypothesis/
 
 # Database
 *.db
@@ -57,6 +62,7 @@ config_customer.py
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Deployment
 deployment_package/
@@ -66,3 +72,12 @@ backup_*/
 data/
 pdfs/
 xmls/
+
+# Temporary helper scripts (generated on-demand)
+fix_*.py
+install_dependencies.bat
+fix_remaining_issues.bat
+
+# Package build artifacts
+*.whl
+pip-wheel-metadata/

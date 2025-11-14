@@ -11,8 +11,8 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 
-from src.utils from src.utils import config
-import database
+from src.utils import config
+from src.database import database
 
 logger = logging.getLogger(__name__)
 

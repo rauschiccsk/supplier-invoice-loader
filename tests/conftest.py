@@ -89,7 +89,7 @@ def sample_invoice_data():
 @pytest.fixture
 def mock_config(monkeypatch):
     """Mock configuration for testing"""
-    from src.utils from src.utils from src.utils import config
+    from src.utils import config
 
     # Mock sensitive values for testing
     monkeypatch.setattr(config, "API_KEY", "test-api-key-12345")
@@ -198,7 +198,7 @@ def mock_smtp_server(monkeypatch):
 @pytest.fixture(autouse=True)
 def reset_metrics():
     """Reset metrics before each test"""
-    from src.utils from src.utils from src.utils import monitoring
+    from src.utils import monitoring
 
     # Save original values
     original_metrics = monitoring.metrics

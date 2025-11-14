@@ -15,6 +15,6 @@ print("\nTrying to from src.business import isdoc_service...")
 try:
     from src.business import isdoc_service
     print("SUCCESS: isdoc imported")
-    print(f"isdoc location: {isdoc.__file__}")
+    print(f"isdoc location: {isdoc_service.__file__}")
 except ModuleNotFoundError as e:
     print(f"FAILED: {e}")

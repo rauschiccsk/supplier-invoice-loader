@@ -267,14 +267,14 @@ def test_send_alert_adds_timestamp_if_missing():
 
 
 @pytest.mark.integration
-@pytest.mark.skipif(
-    not pytest.config.getoption("--run-integration"),
-    reason="Requires --run-integration flag"
-)
-def test_real_email_sending():
+def test_real_email_sending(request):
     """Integration test: Actually send test email (requires valid SMTP config)"""
     from src.utils import notifications
     from src.utils import config
+
+    # Skip if not running integration tests
+    if not request.config.getoption("--run-integration", default=False):
+        pytest.skip("Requires --run-integration flag")
 
     # Skip if SMTP not configured
     if not config.SMTP_USER or not config.SMTP_PASSWORD:

@@ -11,8 +11,8 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 from pathlib import Path
 
-from src.utils from src.utils import config
-import database
+from src.utils import config
+from src.database import database
 
 logger = logging.getLogger(__name__)
 
