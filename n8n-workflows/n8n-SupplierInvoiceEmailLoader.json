@@ -1,0 +1,219 @@
+{
+  "name": "n8n-SupplierInvoiceEmailLoader",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// Split PDF - FIXED VERSION pre FastAPI - MULTI-ITEM SUPPORT\nconst items = $input.all();  // ✅ Získaj VŠETKY items\nconst out = [];\n\n// Spracuj KAŽDÝ email zvlášť\nfor (const item of items) {\n  const bin = item.binary || {};\n  const json = item.json;\n  \n  // Extract email metadata\n  const from = json.from?.text || json.from || \"\";\n  const subject = json.subject || \"\";\n  const date = json.date || new Date().toISOString();\n  const messageId = json.messageId || json.id || \"\";\n  const gmailId = json.uid || json.id || \"\";\n\n  // Spracuj všetky binary prílohy s prefixom attachment_\n  let foundPDF = false;\n  \n  for (const key of Object.keys(bin)) {\n    if (!key.startsWith('attachment_')) continue;\n    \n    const b = bin[key];\n    const name = b.fileName || \"invoice.pdf\";\n    \n    // Filter len PDF súbory\n    if (!name.toLowerCase().endsWith('.pdf')) continue;\n\n    foundPDF = true;\n\n    // Extract base64 content\n    let fileB64 = b.data;\n    if (!fileB64) {\n      const buffer = await this.helpers.getBinaryDataBuffer(item.index, key);\n      fileB64 = buffer.toString('base64');\n    }\n\n    // Prepare payload pre FastAPI\n    out.push({\n      json: {\n        file_b64: fileB64,\n        filename: name,\n        from_email: from,\n        message_id: messageId,\n        gmail_id: gmailId,\n        subject: subject,\n        received_date: date,\n      }\n    });\n  }\n\n  // AK NENAŠIEL PDF v tomto emaili, vráť error item\n  if (!foundPDF) {\n    out.push({\n      json: {\n        file_b64: null,\n        error: \"No PDF attachment found\",\n        from_email: from,\n        message_id: messageId,\n        gmail_id: gmailId,\n        subject: subject,\n        received_date: date,\n      }\n    });\n  }\n}\n\nreturn out;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -672,
+        112
+      ],
+      "id": "66f0e463-5e8f-4ba7-bf3f-e2911c4b4197",
+      "name": "Split PDF"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://magerstav-invoices.icc.sk/invoice",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.LS_API_KEY || 'CHANGE_ME_PRODUCTION_KEY' }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "2c884f05-fb46-4bd0-9ac4-852fe5ca0fd6",
+      "name": "HTTP -> FastAPI /invoice (via Cloudflare Tunnel)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -16,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "sendTo": "rausch@em-1.sk",
+        "subject": "Invoice Processing Error",
+        "message": "=<h2>⚠️ Nerozpoznaná faktúra</h2>\n<p>Email neobsahoval PDF prílohu alebo nie je od dodávateľa L&S.</p>\n\n<h3>📧 DETAILY EMAILU</h3>\n<ul>\n  <li><strong>Od:</strong> {{ $('Email Trigger (IMAP)').item.json.from }}</li>\n  <li><strong>Predmet:</strong> {{ $('Email Trigger (IMAP)').item.json.subject }}</li>\n  <li><strong>Dátum:</strong> {{ $('Email Trigger (IMAP)').item.json.date }}</li>\n</ul>\n\n<p>Prosím spracujte manuálne.</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -16,
+        208
+      ],
+      "id": "48e7f0f6-5cf1-4838-b09a-4294d3afec11",
+      "name": "Send Error Notification",
+      "webhookId": "18880496-fc75-440a-baa9-6de4d846ed0b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "R4z3sbIcTwM3i6TE",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ !!$json.file_b64 }}",
+                    "rightValue": true,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "equals"
+                    },
+                    "id": "91a36b24-87a4-4ede-b092-15602d59d5bf"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Has PDF"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1b4a6c76-c13d-4411-8cbf-4bd8f67d8e8a",
+                    "leftValue": "={{ !!$json.file_b64 }}",
+                    "rightValue": false,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No PDF"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -384,
+        112
+      ],
+      "id": "6522b8a0-b2de-43ec-905a-f288e535daf9",
+      "name": "Has PDF Attachment?"
+    },
+    {
+      "parameters": {
+        "format": "resolved",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [
+        -960,
+        112
+      ],
+      "id": "f0c71d2c-cba3-484b-a79a-d1bf04573c17",
+      "name": "Email Trigger (IMAP)",
+      "credentials": {
+        "imap": {
+          "id": "hsGRSVr8wHektna8",
+          "name": "IMAP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Split PDF": {
+      "main": [
+        [
+          {
+            "node": "Has PDF Attachment?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has PDF Attachment?": {
+      "main": [
+        [
+          {
+            "node": "HTTP -> FastAPI /invoice (via Cloudflare Tunnel)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Error Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP -> FastAPI /invoice (via Cloudflare Tunnel)": {
+      "main": [
+        []
+      ]
+    },
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Split PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "26dc2aef-77ce-4c4f-aca1-c506b6d5941b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c9efa060a1effb29a1cf6ca0778efa875664a185f8bfcd0e3a29c472e1befe8e"
+  },
+  "id": "yBsDIpw6oMs96hi6",
+  "tags": []
+}

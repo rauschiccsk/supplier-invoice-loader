@@ -1,0 +1,119 @@
+# Supplier Invoice Loader - Dependencies
+# Version 2.0 - Multi-Customer Support
+# Updated for Python 3.13 compatibility
+#
+# Python Version Required: 3.10 or later (tested with 3.10, 3.11, 3.12, 3.13)
+# Install: pip install -r requirements.txt
+#
+# Production Installation:
+#   python -m venv venv
+#   source venv/bin/activate  # Linux/Mac
+#   .\venv\Scripts\activate   # Windows
+#   pip install --upgrade pip
+#   pip install -r requirements.txt
+
+# ============================================================================
+# WEB FRAMEWORK
+# ============================================================================
+# FastAPI - Modern web framework with automatic API documentation
+fastapi==0.115.0
+
+# Uvicorn - ASGI server for running FastAPI
+# [standard] includes extra dependencies for production
+uvicorn[standard]==0.32.0
+
+# Pydantic - Data validation using Python type annotations
+pydantic==2.9.0
+
+# Python multipart - For file uploads
+python-multipart==0.0.12
+
+# ============================================================================
+# PDF PROCESSING
+# ============================================================================
+# pdfplumber - PDF text extraction (works better than PyPDF2 for tables)
+pdfplumber==0.11.4
+
+# PyPDF2 - Fallback PDF library
+PyPDF2==3.0.1
+
+# Pillow - Image processing (required by pdfplumber)
+Pillow>=10.4.0
+
+# ============================================================================
+# XML GENERATION (ISDOC)
+# ============================================================================
+# lxml - Fast XML processing library
+lxml>=5.0.0
+
+# ============================================================================
+# ENVIRONMENT & CONFIGURATION
+# ============================================================================
+# python-dotenv - Load environment variables from .env file
+python-dotenv==1.0.1
+
+# ============================================================================
+# MONITORING & SYSTEM
+# ============================================================================
+# psutil - System and process monitoring
+psutil==6.0.0
+
+# ============================================================================
+# HTTP REQUESTS (for NEX Genesis API)
+# ============================================================================
+requests>=2.31.0
+
+# ============================================================================
+# SECURITY (OPTIONAL - for vulnerability scanning)
+# ============================================================================
+# Uncomment for security scanning in development:
+# safety==3.2.0  # Check for known vulnerabilities
+# bandit==1.7.10  # Security linter for Python
+
+# ============================================================================
+# VERSION PINNING NOTES
+# ============================================================================
+# Updated for Python 3.13 compatibility (October 2024)
+#
+# Changes from original requirements.txt:
+#   - fastapi: 0.104.1 -> 0.115.0
+#   - uvicorn: 0.24.0.post1 -> 0.32.0
+#   - pydantic: 2.5.0 -> 2.9.0
+#   - python-multipart: 0.0.6 -> 0.0.12
+#   - pdfplumber: 0.10.3 -> 0.11.4
+#   - Pillow: 10.1.0 -> >=10.4.0 (flexible for latest)
+#   - lxml: 4.9.3 -> >=5.0.0 (flexible for latest)
+#   - python-dotenv: 1.0.0 -> 1.0.1
+#   - psutil: 5.9.6 -> 6.0.0
+#
+# All new versions are tested and backward compatible with the application.
+#
+# Update strategy:
+#   1. Test updates in development first
+#   2. Update one package at a time
+#   3. Run full test suite after each update
+#   4. Monitor logs for issues
+#
+# Check for updates:
+#   pip list --outdated
+#
+# Check for vulnerabilities:
+#   pip install safety
+#   safety check -r requirements.txt
+#
+# Upgrade all (carefully!):
+#   pip install --upgrade -r requirements.txt
+
+# ============================================================================
+# COMPATIBILITY
+# ============================================================================
+# Tested with:
+#   - Python 3.10, 3.11, 3.12, 3.13
+#   - Windows Server 2019, 2022
+#   - Windows 10, 11
+#   - Ubuntu 20.04 LTS, 22.04 LTS
+#   - Debian 11, 12
+#
+# Not compatible with:
+#   - Python 3.9 or earlier (missing type hints features)
+#   - Python 2.x (obviously)

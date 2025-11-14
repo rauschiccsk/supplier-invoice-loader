@@ -1,0 +1,243 @@
+{
+  "name": "SupplierInvoiceEmailLoader_TEMPLATE",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// Split PDF - pre IMAP s binary prefixom\nconst out = [];\nconst bin = $binary || {};\n\nconst from = $json.from?.text || $json.from || \"\";\nconst subject = $json.subject || \"\";\nconst date = $json.date || \"\";\nconst messageId = $json.messageId || \"\";\n\n// Spracuj všetky binary prílohy s prefixom attachment_\nfor (const key of Object.keys(bin)) {\n  if (!key.startsWith('attachment_')) continue;\n  \n  const b = bin[key];\n  const name = b.fileName || \"invoice.pdf\";\n  \n  if (!name.toLowerCase().endsWith('.pdf')) continue;\n\n  let fileB64 = b.data;\n  if (!fileB64) {\n    const buffer = await this.helpers.getBinaryDataBuffer(0, key);\n    fileB64 = buffer.toString('base64');\n  }\n\n  out.push({\n    json: {\n      file_b64: fileB64,\n      filename: name,\n      message_id: messageId,\n      from: from,\n      subject: subject,\n      received_date: date,\n    }\n  });\n}\n\n// AK NENAŠIEL PDF, vráť item s error flagom\nif (out.length === 0) {\n  return [{\n    json: {\n      file_b64: null,  // žiadne PDF\n      error: \"No PDF attachment found\",\n      message_id: messageId,\n      from: from,\n      subject: subject,\n      received_date: date,\n    }\n  }];\n}\n\nreturn out;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -496,
+        -288
+      ],
+      "id": "28314dd0-1205-4dbe-8071-73f52d89100d",
+      "name": "Split PDF"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "PLACEHOLDER_PYTHON_API_URL",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "PLACEHOLDER_API_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "file_b64",
+              "value": "={{ $json.file_b64 }}"
+            },
+            {
+              "name": "filename",
+              "value": "={{$json.filename}}"
+            },
+            {
+              "name": "subject",
+              "value": "={{ $json.subject }}"
+            },
+            {
+              "name": "from",
+              "value": "={{ $json.from }}"
+            },
+            {
+              "name": "message_id",
+              "value": "={{ $json.message_id }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "dcf0aa88-f6a0-411c-8c8b-e40bb6229c8f",
+      "name": "HTTP -> Python /invoice",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        0,
+        -400
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "format": "resolved",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [
+        -752,
+        -288
+      ],
+      "id": "2d23d5be-58d0-44ad-9f7a-26a87d8f911d",
+      "name": "Email Trigger (IMAP)",
+      "executeOnce": false,
+      "retryOnFail": false,
+      "credentials": {
+        "imap": {
+          "id": "PLACEHOLDER_IMAP_CREDENTIAL_ID",
+          "name": "IMAP account - CONFIGURE THIS"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "PLACEHOLDER_ALERT_EMAIL",
+        "subject": "=⚠️ Nerozpoznaná faktúra - {{ $(\"Email Trigger (IMAP)\").item.json.subject }}",
+        "emailType": "text",
+        "message": "=Email neobsahoval PDF prílohu alebo nebol rozpoznaný.\n\n=== DETAILY EMAILU ===\nOd: {{ $(\"Email Trigger (IMAP)\").item.json.from }}\nPredmet: {{ $(\"Email Trigger (IMAP)\").item.json.subject }}\nDátum: {{ $(\"Email Trigger (IMAP)\").item.json.date }}\n\nProsím spracujte manuálne.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -176
+      ],
+      "id": "35b703cc-cb11-45cf-bdd7-5cf3710e26c4",
+      "name": "Send Alert Email",
+      "webhookId": "PLACEHOLDER_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PLACEHOLDER_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account - CONFIGURE THIS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ !!$json.file_b64 }}",
+                    "rightValue": true,
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "equals"
+                    },
+                    "id": "91a36b24-87a4-4ede-b092-15602d59d5bf"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1b4a6c76-c13d-4411-8cbf-4bd8f67d8e8a",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -288,
+        -288
+      ],
+      "id": "6b9de9cf-a206-4a15-bbcb-8ad14eed3080",
+      "name": "Check PDF Present"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Split PDF": {
+      "main": [
+        [
+          {
+            "node": "Check PDF Present",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Split PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP -> Python /invoice": {
+      "main": [
+        []
+      ]
+    },
+    "Check PDF Present": {
+      "main": [
+        [
+          {
+            "node": "HTTP -> Python /invoice",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Alert Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "TEMPLATE_VERSION",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "PLACEHOLDER_INSTANCE_ID"
+  },
+  "id": "TEMPLATE_WORKFLOW_ID",
+  "tags": [
+    "supplier-invoice-loader",
+    "email-automation",
+    "pdf-processing"
+  ]
+}

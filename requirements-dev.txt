@@ -1,0 +1,165 @@
+# Supplier Invoice Loader - Development Dependencies
+# Python Version Required: 3.10 or later
+# Install: pip install -r requirements-dev.txt
+#
+# This automatically installs requirements.txt as well
+
+# First install main requirements
+-r requirements.txt
+
+# ============================================================================
+# TESTING
+# ============================================================================
+# pytest - Testing framework
+pytest==7.4.3
+
+# pytest-cov - Coverage reports
+pytest-cov==4.1.0
+
+# pytest-asyncio - Async test support
+pytest-asyncio==0.21.1
+
+# pytest-mock - Mocking utilities
+pytest-mock==3.12.0
+
+# httpx - For testing FastAPI endpoints
+httpx==0.25.2
+
+# ============================================================================
+# CODE QUALITY & FORMATTING
+# ============================================================================
+# black - Code formatter (opinionated)
+black==23.12.0
+
+# flake8 - Style checker and linter
+flake8==6.1.0
+
+# isort - Import sorter
+isort==5.13.0
+
+# mypy - Static type checker
+mypy==1.7.1
+
+# pylint - Comprehensive code analysis (optional, can be slow)
+# pylint==3.0.3
+
+# ============================================================================
+# SECURITY SCANNING
+# ============================================================================
+# safety - Check for known vulnerabilities in dependencies
+safety==2.3.5
+
+# bandit - Security linter for Python code
+bandit==1.7.5
+
+# ============================================================================
+# DOCUMENTATION BUILDING (Optional)
+# ============================================================================
+# Uncomment if building documentation:
+# sphinx==7.2.6
+# sphinx-rtd-theme==2.0.0
+# myst-parser==2.0.0  # Markdown support for Sphinx
+
+# ============================================================================
+# DEBUGGING & DEVELOPMENT TOOLS
+# ============================================================================
+# ipython - Enhanced Python REPL
+ipython==8.18.1
+
+# ipdb - IPython debugger
+ipdb==0.13.13
+
+# rich - Beautiful terminal output
+rich==13.7.0
+
+# ============================================================================
+# USAGE EXAMPLES
+# ============================================================================
+# Install development dependencies:
+#   pip install -r requirements-dev.txt
+#
+# Run tests:
+#   pytest                                    # Run all tests
+#   pytest tests/test_extraction.py          # Run specific test file
+#   pytest -v                                 # Verbose output
+#   pytest --cov=. --cov-report=html         # With coverage report
+#   pytest -k "test_extraction"              # Run tests matching pattern
+#
+# Format code:
+#   black .                                   # Format all Python files
+#   black main.py                             # Format specific file
+#   black --check .                           # Check without modifying
+#
+# Sort imports:
+#   isort .                                   # Sort all imports
+#   isort --check-only .                      # Check without modifying
+#
+# Check code style:
+#   flake8 .                                  # Check all files
+#   flake8 main.py                            # Check specific file
+#   flake8 --max-line-length=100 .           # Custom line length
+#
+# Type checking:
+#   mypy .                                    # Check all files
+#   mypy main.py                              # Check specific file
+#   mypy --ignore-missing-imports .          # Ignore missing type stubs
+#
+# Security checks:
+#   safety check                              # Check installed packages
+#   safety check -r requirements.txt         # Check requirements file
+#   bandit -r .                               # Security scan all files
+#   bandit -r . -ll                           # Only high/medium severity
+#
+# Combined checks (run before commit):
+#   black . && isort . && flake8 . && mypy . && pytest
+#
+# IPython debugging:
+#   ipython                                   # Start IPython REPL
+#
+#   # In code, add breakpoint:
+#   import ipdb; ipdb.set_trace()
+#
+# ============================================================================
+# CI/CD INTEGRATION
+# ============================================================================
+# Example GitHub Actions workflow snippet:
+#
+# - name: Install dependencies
+#   run: pip install -r requirements-dev.txt
+#
+# - name: Format check
+#   run: black --check .
+#
+# - name: Lint
+#   run: flake8 .
+#
+# - name: Type check
+#   run: mypy .
+#
+# - name: Security check
+#   run: |
+#     safety check
+#     bandit -r .
+#
+# - name: Test
+#   run: pytest --cov=. --cov-report=xml
+#
+# ============================================================================
+# CONFIGURATION FILES
+# ============================================================================
+# Create these files in project root for tool configuration:
+#
+# pyproject.toml - Configuration for black, isort, pytest
+# .flake8 - Configuration for flake8
+# mypy.ini - Configuration for mypy
+#
+# See documentation for examples of these configuration files.
+
+# ============================================================================
+# VERSION NOTES
+# ============================================================================
+# All versions are pinned to exact versions for reproducibility
+# Update quarterly or when security vulnerabilities are discovered
+#
+# Last updated: October 2025
+# Tested with Python 3.10, 3.11, 3.12

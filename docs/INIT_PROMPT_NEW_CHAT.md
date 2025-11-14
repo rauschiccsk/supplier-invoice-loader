@@ -136,13 +136,13 @@ type C:\invoice-loader\logs\service.log
 ## 📚 Dokumentácia
 
 ### Pre Operátorov
-- [User Guide](../USER_GUIDE.md) - Slovak
-- [Troubleshooting](../TROUBLESHOOTING.md)
+- [User Guide](operations/USER_GUIDE.md) - Slovak
+- [Troubleshooting](operations/TROUBLESHOOTING.md)
 
 ### Pre Vývojárov
-- [Development Guide](../DEVELOPMENT.md)
+- [Development Guide](guides/DEVELOPMENT.md)
 - [API Docs](http://localhost:8000/docs)
-- [Testing Guide](../TESTING.md)
+- [Testing Guide](guides/TESTING.md)
 - [Session Notes](SESSION_NOTES.md) - Full history
 
 ### Architektúra

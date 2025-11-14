@@ -1,0 +1,26 @@
+# Supplier Invoice Loader Configuration Template
+# Copy to config.yaml and customize
+
+customer:
+  name: "CUSTOMER_NAME"
+  full_name: "Customer Full Name s.r.o."
+  ico: "12345678"
+
+paths:
+  pdf_storage: "path/to/pdf/storage"
+  xml_storage: "path/to/xml/storage"
+  database: "path/to/invoices.db"
+
+nex_genesis:
+  api_url: "http://localhost:8080/api"
+  api_key: "your-api-key"
+
+email:
+  operator: "operator@customer.com"
+  alert: "alert@icc.sk"
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+
+features:
+  send_daily_summary: true
+  heartbeat_enabled: true
