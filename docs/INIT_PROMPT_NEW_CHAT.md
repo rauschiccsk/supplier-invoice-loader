@@ -2,8 +2,8 @@
 
 **Project:** supplier-invoice-loader (refactored structure)  
 **Version:** 2.0  
-**GitHub:** https://github.com/rauschiccsk/supplier_invoice_loader  
-**Generated:** 2025-11-13 21:57
+**GitHub:** https://github.com/rauschiccsk/supplier-invoice-loader  
+**Generated:** 2025-11-14
 
 ---
 
@@ -25,42 +25,81 @@ Claude odpovie: **"✅ Projekt načítaný. Čo robíme?"**
 **Stack:** Python 3.10+, FastAPI, SQLite, n8n, Cloudflared
 
 **Status:** Production Ready (STORY 1 Complete)  
-**Refactoring:** ✅ New src/ structure, unified docs
+**Refactoring:** ✅ Phase 1 & 2 Complete - Professional src/ structure
 
 ---
 
-## 🗂️ Nová Štruktúra
+## 🗂️ Projektová Štruktúra
 
 ```
 supplier-invoice-loader/
-├── docs/
-│   ├── INIT_PROMPT_NEW_CHAT.md    # Tento súbor
-│   ├── SESSION_NOTES.md           # Unified history
-│   ├── architecture/              # Tech docs
-│   └── database/                  # DB schemas & docs
-│
-├── src/                           # Python source code
-│   ├── extractors/               # PDF extraction
+├── src/                           # Python source code (modular)
+│   ├── api/                      # FastAPI models
+│   │   ├── __init__.py
+│   │   └── models.py
 │   ├── business/                 # Business logic
+│   │   ├── __init__.py
+│   │   └── isdoc_service.py
 │   ├── database/                 # DB operations
-│   ├── api/                      # FastAPI routes
+│   │   ├── __init__.py
+│   │   └── database.py
+│   ├── extractors/               # PDF extraction
+│   │   ├── __init__.py
+│   │   ├── base_extractor.py
+│   │   ├── generic_extractor.py
+│   │   └── ls_extractor.py
 │   └── utils/                    # Utilities
+│       ├── __init__.py
+│       ├── config.py
+│       ├── env_loader.py
+│       ├── notifications.py
+│       └── monitoring.py
+│
+├── docs/                          # Documentation
+│   ├── INIT_PROMPT_NEW_CHAT.md   # This file
+│   ├── SESSION_NOTES.md          # Development history
+│   ├── architecture/             # Architecture docs
+│   ├── database/                 # DB schemas & docs
+│   ├── deployment/               # Deployment guides
+│   ├── operations/               # Operations manuals
+│   └── guides/                   # Development guides
 │
 ├── scripts/                       # Utility scripts
-│   └── generate_project_access.py
+│   ├── generate_project_access.py
+│   ├── service_installer.py
+│   └── cleanup_*.py
 │
 ├── config/                        # Configuration
-│   └── config.yaml
+│   ├── config_customer.py
+│   ├── config_template.py
+│   ├── config.template.yaml
+│   └── .env.example
 │
 ├── database/
 │   └── schemas/                  # SQL schemas
+│       └── README.md
 │
 ├── tests/                         # Test suite
-│   ├── unit/
-│   └── integration/
+│   ├── unit/                     # Unit tests
+│   ├── integration/              # Integration tests
+│   ├── samples/                  # Test data
+│   └── conftest.py
 │
-├── main.py                       # Entry point
-└── supplier-invoice-loader_project_file_access.json
+├── deploy/                        # Deployment scripts
+│   ├── build_package.py
+│   ├── deploy.bat
+│   └── test-deployment.ps1
+│
+├── n8n-workflows/                 # n8n workflow definitions
+│   ├── n8n-SupplierInvoiceEmailLoader.json
+│   └── template.json
+│
+├── main.py                       # Application entry point
+├── requirements.txt              # Production dependencies
+├── requirements-dev.txt          # Development dependencies
+├── pyproject.toml               # Python project configuration
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -76,7 +115,7 @@ supplier-invoice-loader/
 ### L&Š Dodávateľ
 - **IČO:** 36555720
 - **Email:** faktury@farby.sk
-- **Extractor:** `ls_extractor.py`
+- **Extractor:** `src/extractors/ls_extractor.py`
 
 ### Cloudflared Tunnel
 - **URL:** https://magerstav-invoices.icc.sk
@@ -88,27 +127,37 @@ supplier-invoice-loader/
 
 ### Development
 ```bash
-cd c:\Development\supplier-invoice-loader
+cd C:\Development\supplier-invoice-loader
 .\venv\Scripts\activate
 python main.py
 # Server: http://localhost:8000
+# API Docs: http://localhost:8000/docs
 ```
 
 ### Testing
 ```bash
 pytest tests/ -v
-python test_e2e.py
+pytest tests/unit/ -v
+pytest --cov=src --cov-report=html
 ```
 
-### Service Management
+### Import Testing
 ```bash
-sc query SupplierInvoiceLoader
-type C:\invoice-loader\logs\service.log
+python -c "from src.database import database; print('✅ OK')"
+python -c "from src.extractors.ls_extractor import LSExtractor; print('✅ OK')"
 ```
 
 ---
 
 ## 📋 Aktuálny Stav
+
+### ✅ Refactoring Complete (2025-11-14)
+- ✅ Phase 1: Project structure & documentation
+- ✅ Phase 2: Code migration to src/
+- ✅ New GitHub repository: supplier-invoice-loader
+- ✅ Professional modular architecture
+- ✅ Organized documentation (guides/, operations/, deployment/)
+- ✅ All imports updated to src. prefix
 
 ### ✅ STORY 1 - DOKONČENÉ
 - Multi-customer architecture
@@ -119,11 +168,6 @@ type C:\invoice-loader\logs\service.log
 - Cloudflared tunnel
 - 80+ unit tests
 - Complete documentation
-
-### 🔄 Refactoring Status
-- ✅ Phase 1: Documentation structure
-- 🚧 Phase 2: Code migration to src/
-- ⏳ Phase 3: Testing & verification
 
 ### 📝 Planned (STORY 2-6)
 - Human-in-loop validation (web UI)
@@ -136,35 +180,48 @@ type C:\invoice-loader\logs\service.log
 ## 📚 Dokumentácia
 
 ### Pre Operátorov
-- [User Guide](operations/USER_GUIDE.md) - Slovak
+- [User Guide](operations/USER_GUIDE.md)
 - [Troubleshooting](operations/TROUBLESHOOTING.md)
+- [Monitoring](operations/MONITORING.md)
+- [Email Alerting](operations/EMAIL_ALERTING.md)
 
 ### Pre Vývojárov
 - [Development Guide](guides/DEVELOPMENT.md)
-- [API Docs](http://localhost:8000/docs)
 - [Testing Guide](guides/TESTING.md)
-- [Session Notes](SESSION_NOTES.md) - Full history
+- [Python Setup](guides/PYTHON_SETUP.md)
+- [Security](guides/SECURITY.md)
+- [N8N Setup](guides/N8N_WORKFLOW_SETUP.md)
+- [Session Notes](SESSION_NOTES.md)
+
+### Deployment
+- [Deployment Checklist](deployment/DEPLOYMENT_CHECKLIST.md)
+- [Install Customer](deployment/INSTALL_CUSTOMER.md)
+- [Windows Service Guide](deployment/WINDOWS_SERVICE_GUIDE.md)
+- [Release Notes](deployment/RELEASE_NOTES_v2.0.0.md)
 
 ### Architektúra
-- [n8n Workflows](architecture/n8n-workflows.md)
-- [Cloudflared Setup](architecture/cloudflared-setup.md)
 - [Database Schema](database/TYPE_MAPPINGS.md)
+- [Architecture Decisions](decisions/)
 
 ---
 
 ## 🔗 Rýchly Prístup
 
-**Manifest:** `supplier-invoice-loader_project_file_access.json`
-
 **Core Modules:**
-- `src/api/endpoints.py` - FastAPI routes
-- `src/database/database.py` - SQLite operations
+- `src/api/models.py` - Pydantic models
+- `src/database/database.py` - Database operations
 - `src/extractors/ls_extractor.py` - L&Š PDF extractor
-- `src/business/invoice_service.py` - Business logic
+- `src/business/isdoc_service.py` - ISDOC XML generation
+- `src/utils/notifications.py` - Email notifications
+- `src/utils/monitoring.py` - System monitoring
 
 **Configuration:**
-- `config/config.yaml` - Main config
-- `config/config.template.yaml` - Template
+- `config/config.template.yaml` - Config template
+- `config/config_customer.py` - Customer config
+
+**Scripts:**
+- `scripts/service_installer.py` - Windows service installer
+- `scripts/generate_project_access.py` - Manifest generator
 
 ---
 
@@ -175,6 +232,7 @@ type C:\invoice-loader\logs\service.log
 3. **Testuj na reálnych dátach**
 4. **Používaj INIT_PROMPT ako single source of truth**
 5. **Review code changes pred commit**
+6. **Aktualizuj importy: použiť `from src.module import`**
 
 ---
 
@@ -182,278 +240,52 @@ type C:\invoice-loader\logs\service.log
 
 **Developer:** rausch@icc.sk  
 **Support:** support@icc.sk  
-**GitHub:** @rauschiccsk
+**GitHub:** @rauschiccsk  
+**Organization:** ICC Komárno (Innovation & Consulting Center)
 
 ---
 
-## 📖 Kontext z MASTER_CONTEXT
+## 🏗️ Architektúra
 
-\# 🎯 MASTER CONTEXT - Supplier Invoice Loader Project
-
-
-
-\*\*Single Source of Truth pre celý projekt\*\*
-
-
-
----
-
-
-
-\## 📊 Project Overview
-
-
-
-\### Základné informácie
-
-\- \*\*Projekt:\*\* Supplier Invoice Loader v2.0
-
-\- \*\*Účel:\*\* Automatizované spracovanie dodávateľských faktúr cez email → n8n → Python → NEX Genesis
-
-\- \*\*Status:\*\* STORY 1 Complete - Production Ready
-
-\- \*\*Vývojár:\*\* ICC (rausch@icc.sk)
-
-\- \*\*Lokalizácia:\*\* Komárno, SK
-
-
-
-\### GitHub Repository
-
+### High-Level Flow
+```
+Email (Gmail) 
+  → n8n Workflow (IMAP trigger)
+    → Python FastAPI Server (invoice processing)
+      → PDF Extraction (pdfplumber)
+        → SQLite Database
+          → XML Generation (ISDOC)
+            → NEX Genesis API (customer ERP)
 ```
 
-URL: https://github.com/rauschiccsk/supplier\_invoice\_loader
-
-Branch: v2.0-multi-customer
-
-Lokálna cesta: c:\\Development\\supplier\_invoice\_loader
-
-```
-
-
-
-\### Kľúčoví zákazníci
-
-1\. \*\*MAGERSTAV, spol. s r.o.\*\* (Primárny zákazník)
-
-&nbsp;  - Dodávateľ: L\&Š, s.r.o. (farby, laky)
-
-&nbsp;  - Windows 11 deployment
-
-&nbsp;  - NEX Genesis integrácia
-
-
-
-2\. \*\*ANDROS\*\* (Plánovaný)
-
-&nbsp;  - Windows Server 2012 R2
-
-&nbsp;  - Cloudflared tunnel
-
-
+### Tech Stack
+- **Backend:** Python 3.10+, FastAPI, Uvicorn
+- **PDF Processing:** pdfplumber, PyPDF2
+- **Database:** SQLite 3.x
+- **Automation:** n8n workflows
+- **Tunneling:** Cloudflared
+- **Service:** Windows Service (NSSM wrapper)
+- **Notifications:** Gmail SMTP
 
 ---
 
-
-
-\## 🏗️ Architektúra systému
-
-
-
-\### High-Level Diagram
-
-```
-
-┌─────────────────────────────────────────────────────────────┐
-
-│                    CENTRÁLNY ICC SERVER                      │
-
-│                  (128GB RAM, 12 cores)                       │
-
-│                                                              │
-
-│  ┌──────────────────────────────────────────────────────┐  │
-
-│  │  n8n Workflows Engine                                 │  │
-
-│  │  - Email IMAP monitoring                              │  │
-
-│  │  - PDF attachment processing                          │  │
-
-│  │  - Multi-customer workflow management                 │  │
-
-│  └──────────────────────────────────────────────────────┘  │
-
-│                          ↓                                   │
-
-│  ┌──────────────────────────────────────────────────────┐  │
-
-│  │  Python FastAPI Servers (per zákazník)               │  │
-
-│  │  - Invoice processing                                 │  │
-
-│  │  - PDF extraction (pdfplumber)                        │  │
-
-│  │  - Data validation                                    │  │
-
-│  │  - SQLite database                                    │  │
-
-│  └──────────────────────────────────────────────────────┘  │
-
-└─────────────────────────────────────────────────────────────┘
-
-&nbsp;                         ↓
-
-&nbsp;                  (Cloudflare Tunnel)
-
-&nbsp;                         ↓
-
-┌──────────────────────────────────────────────────────────────┐
-
-│                    ZÁKAZNÍCKE SERVERY                         │
-
-│  ┌────────────────────┐       ┌─────────────────────────┐   │
-
-│  │  Windows 11        │       │ Windows Server 2012 R2   │   │
-
-│  │  (MAGERSTAV)       │       │ (budúci zákazník)        │   │
-
-│  ├────────────────────┤       ├─────────────────────────┤   │
-
-│  │ Python Server:8000 │       │ Python Server:8000       │   │
-
-│  │ Windows Service    │       │ Windows Service          │   │
-
-│  │ SQLite DB          │       │ SQLite DB                │   │
-
-│  │ PDF/XML Storage    │       │ PDF/XML Storage          │   │
-
-│  └────────────────────┘       └─────────────────────────┘   │
-
-│           ↓                              ↓                    │
-
-│  ┌────────────────────┐       ┌─────────────────────────┐   │
-
-│  │ NEX Genesis        │       │ NEX Genesis              │   │
-
-│  │ (Delphi/Pervasive) │       │ (Delphi/Pervasive)       │   │
-
-│  │ Port: 8080/API     │       │ Port: 8080/API           │   │
-
-│  └────────────────────┘       └─────────────────────────┘   │
-
-└──────────────────────────────────────────────────────────────┘
-
-```
-
-
-
-\### Tech Stack
-
-
-
-\*\*Backend:\*\*
-
-\- Python 3.10+
-
-\- FastAPI framework
-
-\- pdfplumber (PDF extraction)
-
-\- SQLite (database)
-
-\- Windows Service (NSSM wrapper)
-
-
-
-\*\*Automatizácia:\*\*
-
-\- n8n workflows
-
-\- Email IMAP trigger
-
-\- Cloudflared tunnels (secure connection)
-
-
-
-\*\*Deployment:\*\*
-
-\- Windows 11 (development \& MAGERSTAV)
-
-\- Windows Server 2012 R2 (plánované)
-
-\- Git-based deployment
-
-
-
-\*\*External Systems:\*\*
-
-\- NEX Genesis (Delphi informačný systém)
-
-\- Pervasive database
-
-\- Gmail SMTP (notifikácie)
-
-
+## 📖 Projekt Info
+
+**Zákazníci:**
+- MAGERSTAV, spol. s r.o. (production)
+- ANDROS (planned)
+
+**Dodávatelia:**
+- L&Š, s.r.o. (IČO: 36555720) - farby, laky
+
+**Environment:**
+- Windows 11 / Windows Server 2012 R2
+- Python 3.10+
+- Local SQLite database
+- Network file storage (PDF/XML)
 
 ---
 
-
-
-\## 📁 Projektová štruktúra
-
-
-
-```
-
-supplier\_invoice\_loader/
-
-├── docs/                          # Dokumentácia
-
-│   ├── MASTER\_CONTEXT.md         # Tento súbor - Single Source of Truth
-
-│   ├── architecture/             # Architektonické diagramy a popisy
-
-│   │   ├── n8n-workflows.md
-
-│   │   ├── cloudflared-setup.md
-
-│   │   └── python-api.md
-
-│   ├── decisions/                # Architecture Decision Records (ADR)
-
-│   │   └── ADR-001-example.md
-
-│   ├── sessions/                 # Daily/session notes
-
-│   │   └── 2025-10-17-session.md
-
-│   └── troubleshooting/          # Známe problémy a riešenia
-
-│       └── common-issues.md
-
-├── src/                          # Python source code
-
-│   ├── main.py                   # FastAPI aplikácia
-
-│   ├── database.py               # SQLite wrapper
-
-│   ├── extractors/               # PDF extraction moduly
-
-│   │   ├── \_\_init\_\_.py
-
-│   │   ├── generic\
-
----
-
-## 📅 Latest Session Summary
-
-# Session Notes
-Daily work logs and session summaries.
-
-
----
-
-**Pre kompletný session history pozri:** [SESSION_NOTES.md](SESSION_NOTES.md)
+**Pre kompletný development history pozri:** [SESSION_NOTES.md](SESSION_NOTES.md)
 
 **End of Init Prompt**
