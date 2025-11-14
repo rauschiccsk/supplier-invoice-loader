@@ -3,7 +3,7 @@
 **Project:** supplier-invoice-loader (refactored structure)  
 **Version:** 2.0  
 **GitHub:** https://github.com/rauschiccsk/supplier-invoice-loader  
-**Generated:** 2025-11-14
+**Last Updated:** 2025-11-14
 
 ---
 
@@ -22,9 +22,10 @@ Claude odpovie: **"✅ Projekt načítaný. Čo robíme?"**
 
 **Účel:** Automatizované spracovanie dodávateľských faktúr  
 **Flow:** Email → n8n → Python FastAPI → NEX Genesis  
-**Stack:** Python 3.10+, FastAPI, SQLite, n8n, Cloudflared
+**Stack:** Python 3.11+, FastAPI, SQLite, n8n, Cloudflared
 
-**Status:** Production Ready (STORY 1 Complete)  
+**Status:** Development Environment Ready  
+**Production:** STORY 1 Complete  
 **Refactoring:** ✅ Phase 1 & 2 Complete - Professional src/ structure
 
 ---
@@ -33,6 +34,7 @@ Claude odpovie: **"✅ Projekt načítaný. Čo robíme?"**
 
 ```
 supplier-invoice-loader/
+├── .venv/                         # Virtual environment (Python 3.11.9)
 ├── src/                           # Python source code (modular)
 │   ├── api/                      # FastAPI models
 │   │   ├── __init__.py
@@ -65,9 +67,9 @@ supplier-invoice-loader/
 │   └── guides/                   # Development guides
 │
 ├── scripts/                       # Utility scripts
-│   ├── generate_project_access.py
-│   ├── service_installer.py
-│   └── cleanup_*.py
+│   ├── generate_project_access.py  # Manifest generator
+│   ├── service_installer.py        # Windows service installer
+│   └── verify_installation.py      # Setup verification
 │
 ├── config/                        # Configuration
 │   ├── config_customer.py
@@ -75,25 +77,14 @@ supplier-invoice-loader/
 │   ├── config.template.yaml
 │   └── .env.example
 │
-├── database/
-│   └── schemas/                  # SQL schemas
-│       └── README.md
-│
 ├── tests/                         # Test suite
-│   ├── unit/                     # Unit tests
+│   ├── unit/                     # Unit tests (43 passing, 26 failing)
 │   ├── integration/              # Integration tests
 │   ├── samples/                  # Test data
 │   └── conftest.py
 │
 ├── deploy/                        # Deployment scripts
-│   ├── build_package.py
-│   ├── deploy.bat
-│   └── test-deployment.ps1
-│
 ├── n8n-workflows/                 # n8n workflow definitions
-│   ├── n8n-SupplierInvoiceEmailLoader.json
-│   └── template.json
-│
 ├── main.py                       # Application entry point
 ├── requirements.txt              # Production dependencies
 ├── requirements-dev.txt          # Development dependencies
@@ -105,6 +96,12 @@ supplier-invoice-loader/
 ---
 
 ## 🔑 Kritická Konfigurácia
+
+### Development Environment
+- **Python:** 3.11.9 (in `.venv/`)
+- **IDE:** PyCharm Community Edition 2024.2.4
+- **Install Mode:** Editable (`pip install -e .`)
+- **Package:** `supplier-invoice-loader==2.0.0`
 
 ### MAGERSTAV Setup
 - **IČO:** 31436871
@@ -125,31 +122,86 @@ supplier-invoice-loader/
 
 ## 🚀 Quick Commands
 
-### Development
-```bash
+### Development Setup
+```powershell
 cd C:\Development\supplier-invoice-loader
-.\venv\Scripts\activate
+
+# Activate virtual environment (ALWAYS FIRST!)
+.\.venv\Scripts\Activate.ps1
+
+# Install dependencies (if needed)
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+
+# Install project in editable mode
+pip install -e .
+```
+
+### Run Application
+```powershell
+# Activate venv first!
+.\.venv\Scripts\Activate.ps1
+
+# Start server
 python main.py
+
 # Server: http://localhost:8000
 # API Docs: http://localhost:8000/docs
 ```
 
+### PyCharm
+```
+Run Configurations:
+  - "Supplier Invoice Loader (FastAPI)" - Start server
+  - "pytest - All Tests" - Run all tests
+  - "pytest - Unit Tests" - Run unit tests only
+
+External Tools:
+  - Black - Format File (code formatter)
+  - isort - Sort Imports (import organizer)
+```
+
 ### Testing
-```bash
+```powershell
+# Activate venv
+.\.venv\Scripts\Activate.ps1
+
+# All tests
 pytest tests/ -v
+
+# Unit tests only
 pytest tests/unit/ -v
+
+# With coverage
 pytest --cov=src --cov-report=html
+
+# Current status: 43 passed, 26 failed, 2 skipped
 ```
 
 ### Import Testing
-```bash
+```powershell
 python -c "from src.database import database; print('✅ OK')"
 python -c "from src.extractors.ls_extractor import LSExtractor; print('✅ OK')"
+```
+
+### Verification
+```powershell
+# Verify complete installation
+python scripts/verify_installation.py
 ```
 
 ---
 
 ## 📋 Aktuálny Stav
+
+### ✅ Development Environment Setup (2025-11-14)
+- ✅ Python 3.11.9 virtual environment (`.venv/`)
+- ✅ All dependencies installed (production + dev)
+- ✅ Project installed in editable mode (`pip install -e .`)
+- ✅ PyCharm configured (run configs, external tools)
+- ✅ FastAPI server running (http://localhost:8000)
+- ✅ Import fixes completed (src/utils/, tests/)
+- ✅ 43 tests passing (26 failing - known issues)
 
 ### ✅ Refactoring Complete (2025-11-14)
 - ✅ Phase 1: Project structure & documentation
@@ -159,7 +211,7 @@ python -c "from src.extractors.ls_extractor import LSExtractor; print('✅ OK')"
 - ✅ Organized documentation (guides/, operations/, deployment/)
 - ✅ All imports updated to src. prefix
 
-### ✅ STORY 1 - DOKONČENÉ
+### ✅ STORY 1 - Production Ready
 - Multi-customer architecture
 - PDF extraction engine (pdfplumber)
 - SQLite database v2
@@ -169,7 +221,12 @@ python -c "from src.extractors.ls_extractor import LSExtractor; print('✅ OK')"
 - 80+ unit tests
 - Complete documentation
 
+### ⚠️ Known Issues
+- **26 test failures:** API endpoints (404), mock paths, XSS test
+- **Decision:** Marked as technical debt, will fix in future session
+
 ### 📝 Planned (STORY 2-6)
+- Fix failing tests
 - Human-in-loop validation (web UI)
 - NEX Genesis API integration
 - OCR support for scanned PDFs
@@ -222,17 +279,24 @@ python -c "from src.extractors.ls_extractor import LSExtractor; print('✅ OK')"
 **Scripts:**
 - `scripts/service_installer.py` - Windows service installer
 - `scripts/generate_project_access.py` - Manifest generator
+- `scripts/verify_installation.py` - Installation verification
+
+**Testing:**
+- `tests/unit/` - Unit tests (43 passing)
+- `tests/conftest.py` - Pytest configuration & fixtures
 
 ---
 
 ## 💡 Best Practices
 
-1. **Vždy commit pred limitom chatu**
-2. **Session notes po každom pracovnom dni**
-3. **Testuj na reálnych dátach**
-4. **Používaj INIT_PROMPT ako single source of truth**
-5. **Review code changes pred commit**
-6. **Aktualizuj importy: použiť `from src.module import`**
+1. **VŽDY aktivuj venv pred prácou:** `.\.venv\Scripts\Activate.ps1`
+2. **Commit pred limitom chatu**
+3. **Session notes po každom pracovnom dni**
+4. **Testuj na reálnych dátach**
+5. **Používaj INIT_PROMPT ako single source of truth**
+6. **Review code changes pred commit**
+7. **Aktualizuj importy: použiť `from src.module import`**
+8. **Regeneruj manifest po každom push:** `python scripts\generate_project_access.py`
 
 ---
 
@@ -259,13 +323,14 @@ Email (Gmail)
 ```
 
 ### Tech Stack
-- **Backend:** Python 3.10+, FastAPI, Uvicorn
+- **Backend:** Python 3.11+, FastAPI, Uvicorn
 - **PDF Processing:** pdfplumber, PyPDF2
 - **Database:** SQLite 3.x
 - **Automation:** n8n workflows
 - **Tunneling:** Cloudflared
 - **Service:** Windows Service (NSSM wrapper)
 - **Notifications:** Gmail SMTP
+- **Development:** PyCharm, pytest, Black, isort
 
 ---
 
@@ -279,8 +344,8 @@ Email (Gmail)
 - L&Š, s.r.o. (IČO: 36555720) - farby, laky
 
 **Environment:**
-- Windows 11 / Windows Server 2012 R2
-- Python 3.10+
+- Development: Windows 11, Python 3.11.9, PyCharm
+- Production: Windows Server 2012 R2, Python 3.10+
 - Local SQLite database
 - Network file storage (PDF/XML)
 

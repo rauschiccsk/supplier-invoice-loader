@@ -2,7 +2,7 @@
 
 **Project:** supplier-invoice-loader  
 **Last Updated:** 2025-11-14  
-**Status:** ✅ Production Ready - Refactored Structure
+**Status:** ✅ Development Environment Ready
 
 ---
 
@@ -11,7 +11,7 @@
 Automatizované spracovanie dodávateľských faktúr cez email → n8n → Python FastAPI → NEX Genesis.
 
 **Tech Stack:**
-- Python 3.10+, FastAPI, SQLite, pdfplumber
+- Python 3.11+, FastAPI, SQLite, pdfplumber
 - n8n workflows, Cloudflared tunnels
 - Windows Service deployment
 
@@ -24,7 +24,119 @@ Automatizované spracovanie dodávateľských faktúr cez email → n8n → Pyth
 
 ---
 
-## ✅ Completed Work
+## 📅 Session History
+
+### Session 2025-11-14: Python Environment Setup & PyCharm Configuration
+
+**Duration:** ~3 hours  
+**Objective:** Setup development environment in PyCharm
+
+#### ✅ Completed Tasks
+
+1. **Python Virtual Environment**
+   - Created `.venv` with Python 3.11.9
+   - Installed production dependencies (fastapi, uvicorn, pdfplumber, etc.)
+   - Installed development dependencies (pytest, black, isort, safety, etc.)
+   - Fixed dependency conflicts (safety 2.3.5 → 3.2.0)
+
+2. **Project Configuration**
+   - Updated `pyproject.toml`:
+     - Synchronized dependency versions with requirements.txt
+     - Added `[tool.setuptools]` configuration for src/ package discovery
+     - Fixed package metadata
+   - Updated `requirements-dev.txt` (safety version)
+   - Updated `.gitignore` (added *.egg-info, temp scripts)
+
+3. **Import Fixes**
+   - Fixed `src/utils/config.py` - import paths for config modules
+   - Fixed `src/utils/monitoring.py` - removed duplicate imports, fixed database import
+   - Fixed `src/utils/notifications.py` - removed duplicate imports, fixed database import
+   - Fixed `tests/conftest.py` - removed triple duplicate imports
+   - Fixed `tests/unit/test_import.py` - variable name error
+   - Fixed `tests/unit/test_notifications.py` - deprecated pytest.config API
+
+4. **Editable Install**
+   - Installed project with `pip install -e .`
+   - Enabled `from src.module import` syntax across project
+   - Verified all imports working
+
+5. **PyCharm Configuration**
+   - Created run configurations:
+     - FastAPI Server (main.py)
+     - pytest - All Tests
+     - pytest - Unit Tests
+     - pytest - Integration Tests
+   - Configured external tools:
+     - Black (code formatter)
+     - isort (import sorter)
+   - Set Python interpreter to `.venv` (Python 3.11.9)
+
+6. **Verification**
+   - FastAPI server: ✅ Running on http://localhost:8000
+   - API Docs: ✅ Accessible at http://localhost:8000/docs
+   - Tests: 43 passed, 26 failed, 2 skipped (see issues below)
+   - Imports: ✅ All project imports working
+
+#### ⚠️ Known Issues
+
+1. **Test Failures (26 failed)**
+   - **API endpoint tests (16 failed):** Routes return 404 - endpoints may be missing in main.py
+   - **Mock path errors (7 failed):** `@patch('notifications...')` should be `@patch('src.utils.notifications...')`
+   - **XSS test (1 failed):** HTML escaping not implemented in email templates
+   - **Config test (1 failed):** Environment variable override test
+   - **Full invoice test (1 failed):** Missing sample PDF file
+   
+   **Decision:** Marked as technical debt, tests will be fixed in future session
+
+2. **Temporary Helper Scripts**
+   - Created during setup: `fix_conftest.py`, `fix_tests.py`, `fix_all_imports.py`
+   - Not committed to Git (in .gitignore)
+   - Generate new versions when needed
+
+#### 📦 Files Changed
+
+**Modified:**
+- `pyproject.toml` - dependencies + setuptools config
+- `requirements-dev.txt` - safety version
+- `.gitignore` - new patterns
+- `src/utils/config.py` - import fixes
+- `src/utils/monitoring.py` - import fixes
+- `src/utils/notifications.py` - import fixes
+- `tests/conftest.py` - import fixes
+- `tests/unit/test_import.py` - variable fix
+- `tests/unit/test_notifications.py` - pytest API update
+
+**Created:**
+- `.venv/` - virtual environment
+- `supplier_invoice_loader.egg-info/` - package metadata
+
+#### 🎓 Lessons Learned
+
+1. **Refactoring Impact:** Moving to src/ structure required fixing import paths across project
+2. **Test Dependencies:** Mock paths need to match new module structure
+3. **PyCharm Setup:** Proper interpreter and editable install crucial for imports
+4. **Dependency Management:** pyproject.toml must sync with requirements.txt
+
+#### 📋 Next Steps
+
+1. **Fix Test Failures:**
+   - Update mock paths in test_notifications.py
+   - Check main.py for missing API endpoints
+   - Add HTML escaping to email templates
+   - Create sample PDF for tests
+
+2. **Code Quality:**
+   - Run Black on all Python files
+   - Run isort on all imports
+   - Optional: Add flake8 and mypy to external tools
+
+3. **Documentation:**
+   - Update developer guide with venv setup steps
+   - Document PyCharm configuration
+
+---
+
+## ✅ Completed Work (Previous Sessions)
 
 ### STORY 1 - Production Ready (October 2025)
 - Multi-customer SaaS architecture
@@ -63,6 +175,7 @@ Automatizované spracovanie dodávateľských faktúr cez email → n8n → Pyth
 
 ```
 supplier-invoice-loader/
+├── .venv/                         # Virtual environment (Python 3.11.9)
 ├── src/                           # Python source code
 │   ├── api/                      # FastAPI models
 │   ├── business/                 # Business logic (ISDOC)
@@ -70,18 +183,25 @@ supplier-invoice-loader/
 │   ├── extractors/               # PDF extraction
 │   └── utils/                    # Config, notifications, monitoring
 ├── docs/                          # Documentation
+│   ├── INIT_PROMPT_NEW_CHAT.md  # Session initialization
+│   ├── SESSION_NOTES.md         # This file
 │   ├── guides/                   # Development guides
 │   ├── operations/               # User & operations manuals
 │   ├── deployment/               # Deployment guides
 │   ├── architecture/             # Technical docs
 │   └── database/                 # DB schemas
 ├── scripts/                       # Utility scripts
+│   ├── service_installer.py     # Windows service installer
+│   ├── generate_project_access.py  # Manifest generator
+│   └── verify_installation.py   # Setup verification
 ├── config/                        # Configuration files
 ├── tests/                         # Test suite
 ├── deploy/                        # Deployment scripts
 ├── n8n-workflows/                # n8n workflow definitions
 ├── main.py                       # Application entry point
-├── requirements.txt              # Dependencies
+├── requirements.txt              # Production dependencies
+├── requirements-dev.txt          # Development dependencies
+├── pyproject.toml               # Python project configuration
 └── README.md
 ```
 
@@ -111,27 +231,60 @@ supplier-invoice-loader/
 ### Setup
 ```bash
 cd C:\Development\supplier-invoice-loader
-python -m venv venv
-.\venv\Scripts\activate
+
+# Activate virtual environment
+.\.venv\Scripts\Activate.ps1
+
+# Install dependencies (if needed)
 pip install -r requirements.txt
+pip install -r requirements-dev.txt
+
+# Install project in editable mode
+pip install -e .
 ```
 
 ### Run Application
 ```bash
+# With venv activated
 python main.py
+
+# Or in PyCharm: Run "Supplier Invoice Loader (FastAPI)" configuration
+
 # Server: http://localhost:8000
 # API Docs: http://localhost:8000/docs
 ```
 
 ### Testing
 ```bash
+# All tests
 pytest tests/ -v
+
+# Unit tests only
 pytest tests/unit/ -v
+
+# With coverage
 pytest --cov=src --cov-report=html
+
+# Or in PyCharm: Run "pytest - All Tests" configuration
 ```
 
-### Import Verification
+### Code Formatting
 ```bash
+# Format file with Black
+black path/to/file.py
+
+# Sort imports with isort
+isort path/to/file.py
+
+# Or in PyCharm: Right-click → External Tools → Black/isort
+```
+
+### Verification
+```bash
+# Verify installation
+python scripts/verify_installation.py
+
+# Test imports
 python -c "from src.database import database; print('✅ OK')"
 python -c "from src.extractors.ls_extractor import LSExtractor; print('✅ OK')"
 ```
@@ -191,6 +344,12 @@ NEX Genesis API (customer ERP)
 
 ## 🔧 Technical Details
 
+### Python Environment
+- **Version:** Python 3.11.9
+- **Virtual Environment:** `.venv/` (not in Git)
+- **Package Install:** Editable mode (`pip install -e .`)
+- **IDE:** PyCharm Community Edition 2024.2.4
+
 ### Database Schema (SQLite)
 - Table: invoices
 - Key fields: file_hash (unique), invoice_number, customer_name
@@ -215,51 +374,37 @@ from src.utils import notifications, monitoring, config
 
 ---
 
-## 📝 Known Issues & Solutions
+## 💡 Best Practices
 
-### Issue: PDF Extraction Failed
-**Solution:** Check if PDF is scanned image (needs OCR) or actual text
-
-### Issue: Duplicate Detection
-**Solution:** Uses SHA-256 file hash, checks before processing
-
-### Issue: Windows Service Won't Start
-**Solution:** Check Python path, port 8000 availability, logs at `C:\invoice-loader\logs\`
-
-### Issue: Email Notifications Not Sending
-**Solution:** Verify Gmail App Password in .env, check SMTP settings
+1. **Vždy aktivuj venv pred prácou:** `.\.venv\Scripts\Activate.ps1`
+2. **Commit pred limitom chatu**
+3. **Používaj INIT_PROMPT_NEW_CHAT.md pre nové chaty**
+4. **Testuj na reálnych dátach pred deployment**
+5. **Aktualizuj SESSION_NOTES.md po dokončení práce**
+6. **Review code changes pred commit**
+7. **Use src. prefix pre všetky importy**
+8. **Regeneruj manifest po každom push:** `python scripts\generate_project_access.py`
 
 ---
 
-## 🎯 Next Steps
+## 🎯 Future Work
 
-### Immediate (Testing)
-1. Test main.py v novom prostredí
-2. Verify všetky importy fungujú
-3. Run pytest suite
-4. Test v novom Claude chate s INIT_PROMPT
+### Short-term (Next Session)
+1. Fix 26 failing tests
+2. Add missing API endpoints (if needed)
+3. Implement HTML escaping in email templates
+4. Run code formatting (Black + isort) on all files
 
-### Short-term (STORY 2)
-- Human-in-loop validation UI
+### STORY 2 - Human-in-loop Validation
 - Web interface for operators
 - Approve/Reject workflow
+- Invoice preview UI
 
-### Long-term (STORY 3-6)
+### STORY 3-6 - Advanced Features
 - NEX Genesis API direct integration
 - OCR support for scanned PDFs
 - Advanced monitoring dashboard
 - Multi-supplier factory pattern
-
----
-
-## 💡 Best Practices
-
-1. **Vždy commit pred limitom chatu**
-2. **Používaj INIT_PROMPT_NEW_CHAT.md pre nové chaty**
-3. **Testuj na reálnych dátach pred deployment**
-4. **Aktualizuj SESSION_NOTES.md po dokončení práce**
-5. **Review code changes pred commit**
-6. **Use src. prefix pre všetky importy**
 
 ---
 
