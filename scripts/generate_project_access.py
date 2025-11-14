@@ -229,7 +229,7 @@ def generate_manifest(project_root: Path):
     }
 
     # Save manifest
-    output_file = project_root / "supplier-invoice-loader_project_file_access.json"
+    output_file = project_root / "docs\project_file_access.json"
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
 
