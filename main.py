@@ -7,8 +7,10 @@ Multi-customer SaaS for automated invoice processing.
 """
 
 import time
+import hashlib
 from datetime import datetime
 from typing import Optional
+from pathlib import Path
 import base64
 
 from fastapi import FastAPI, Header, HTTPException, Depends
@@ -17,7 +19,11 @@ from pydantic import BaseModel
 
 from src.api import models
 from src.utils import config, monitoring, notifications
+from src.utils.text_utils import clean_string
 from src.database import database
+from src.database.postgres_staging import PostgresStagingClient
+from src.extractors.ls_extractor import extract_invoice_data
+from src.business.isdoc_service import generate_isdoc_xml
 
 # Start time for uptime calculation
 START_TIME = time.time()
@@ -257,6 +263,14 @@ async def process_invoice(
 
     Main endpoint for invoice processing from n8n workflow
 
+    Workflow:
+    1. Decode and save PDF
+    2. Extract invoice data from PDF
+    3. Save to SQLite database
+    4. Generate ISDOC XML
+    5. Save XML to disk
+    6. [Optional] Save to PostgreSQL staging database for invoice-editor
+
     Args:
         request: Invoice data including PDF file
 
@@ -264,23 +278,143 @@ async def process_invoice(
         Processing result with status and extracted data
     """
     try:
-        # Decode PDF file
+        # 1. Decode PDF file
         pdf_data = base64.b64decode(request.file_b64)
 
-        # TODO: Implement full processing pipeline
-        # 1. Save PDF to disk
-        # 2. Extract data from PDF
-        # 3. Save to database
-        # 4. Generate XML
-        # 5. Send to NEX Genesis
+        # Generate unique filename with timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        pdf_filename = f"{timestamp}_{request.filename}"
+        pdf_path = config.PDF_DIR / pdf_filename
 
+        # Save PDF to disk
+        pdf_path.write_bytes(pdf_data)
+        print(f"✅ PDF saved: {pdf_path}")
+
+        # Calculate file hash for duplicate detection
+        file_hash = hashlib.md5(pdf_data).hexdigest()
+
+        # 2. Extract data from PDF
+        invoice_data = extract_invoice_data(str(pdf_path))
+
+        if not invoice_data:
+            raise Exception("Failed to extract data from PDF")
+
+        print(f"✅ Data extracted: Invoice {invoice_data.invoice_number}")
+
+        # 3. Save to SQLite database
+        database.init_database()
+        database.save_invoice(
+            customer_name=invoice_data.customer_name,
+            invoice_number=invoice_data.invoice_number,
+            invoice_date=invoice_data.issue_date,
+            total_amount=float(invoice_data.total_amount) if invoice_data.total_amount else 0.0,
+            file_path=str(pdf_path),
+            file_hash=file_hash,
+            status="received"
+        )
+        print(f"✅ Saved to SQLite: {invoice_data.invoice_number}")
+
+        # 4. Generate ISDOC XML
+        xml_filename = f"{invoice_data.invoice_number}.xml"
+        xml_path = config.XML_DIR / xml_filename
+
+        isdoc_xml = generate_isdoc_xml(invoice_data, str(xml_path))
+        print(f"✅ ISDOC XML generated: {xml_path}")
+
+        # 5. Save to PostgreSQL staging database (if enabled)
+        postgres_saved = False
+        postgres_invoice_id = None
+
+        if config.POSTGRES_STAGING_ENABLED:
+            try:
+                # Prepare PostgreSQL config
+                pg_config = {
+                    'host': config.POSTGRES_HOST,
+                    'port': config.POSTGRES_PORT,
+                    'database': config.POSTGRES_DATABASE,
+                    'user': config.POSTGRES_USER,
+                    'password': config.POSTGRES_PASSWORD
+                }
+
+                # Create PostgreSQL client
+                with PostgresStagingClient(pg_config) as pg_client:
+                    # Check for duplicates
+                    is_duplicate = pg_client.check_duplicate_invoice(
+                        invoice_data.supplier_ico,
+                        invoice_data.invoice_number
+                    )
+
+                    if is_duplicate:
+                        print(f"⚠️  Invoice already exists in PostgreSQL staging: {invoice_data.invoice_number}")
+                    else:
+                        # Prepare invoice data for PostgreSQL
+                        invoice_pg_data = {
+                            'supplier_ico': invoice_data.supplier_ico,
+                            'supplier_name': invoice_data.supplier_name,
+                            'supplier_dic': invoice_data.supplier_dic,
+                            'invoice_number': invoice_data.invoice_number,
+                            'invoice_date': invoice_data.issue_date,
+                            'due_date': invoice_data.due_date,
+                            'total_amount': invoice_data.total_amount,
+                            'total_vat': invoice_data.tax_amount,
+                            'total_without_vat': invoice_data.net_amount,
+                            'currency': invoice_data.currency
+                        }
+
+                        # Prepare items data for PostgreSQL
+                        items_pg_data = []
+                        for item in invoice_data.items:
+                            items_pg_data.append({
+                                'line_number': item.line_number,
+                                'name': item.description,
+                                'quantity': item.quantity,
+                                'unit': item.unit,
+                                'price_per_unit': item.unit_price_no_vat,
+                                'ean': item.ean_code,
+                                'vat_rate': item.vat_rate
+                            })
+
+                        # Insert to PostgreSQL
+                        postgres_invoice_id = pg_client.insert_invoice_with_items(
+                            invoice_pg_data,
+                            items_pg_data,
+                            isdoc_xml
+                        )
+
+                        if postgres_invoice_id:
+                            postgres_saved = True
+                            print(f"✅ Saved to PostgreSQL staging: invoice_id={postgres_invoice_id}")
+                        else:
+                            print(f"❌ Failed to save to PostgreSQL staging")
+
+            except Exception as pg_error:
+                # Log error but don't fail the whole process
+                print(f"⚠️  PostgreSQL staging error: {pg_error}")
+                # Continue - invoice is still saved to SQLite and files
+
+        # Return success response
         return {
             "success": True,
-            "message": "Invoice processing started",
-            "filename": request.filename,
+            "message": "Invoice processed successfully",
+            "invoice_number": invoice_data.invoice_number,
+            "customer_name": invoice_data.customer_name,
+            "total_amount": float(invoice_data.total_amount) if invoice_data.total_amount else 0.0,
+            "items_count": len(invoice_data.items),
+            "pdf_saved": str(pdf_path),
+            "xml_saved": str(xml_path),
+            "sqlite_saved": True,
+            "postgres_staging_enabled": config.POSTGRES_STAGING_ENABLED,
+            "postgres_saved": postgres_saved,
+            "postgres_invoice_id": postgres_invoice_id,
             "received_date": request.received_date
         }
+
     except Exception as e:
+        # Log error
+        print(f"❌ Invoice processing failed: {e}")
+        import traceback
+        traceback.print_exc()
+
         raise HTTPException(
             status_code=500,
             detail=f"Invoice processing failed: {str(e)}"
@@ -346,6 +480,9 @@ async def startup_event():
     print(f"PDF Storage: {config.PDF_DIR}")
     print(f"XML Storage: {config.XML_DIR}")
     print(f"Database: {config.DB_FILE}")
+    print(f"PostgreSQL Staging: {'Enabled' if config.POSTGRES_STAGING_ENABLED else 'Disabled'}")
+    if config.POSTGRES_STAGING_ENABLED:
+        print(f"PostgreSQL: {config.POSTGRES_HOST}:{config.POSTGRES_PORT}/{config.POSTGRES_DATABASE}")
     print("=" * 60)
 
 
