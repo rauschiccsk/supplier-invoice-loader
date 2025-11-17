@@ -80,9 +80,9 @@ BASE_DIR (Path):
 
 STORAGE_BASE (Path):
     Root directory for storing PDFs and XMLs
-    Default: C:\NEX_INVOICES (Windows) or /opt/nex_invoices (Linux)
+    Default: C:\\NEX_INVOICES (Windows) or /opt/nex_invoices (Linux)
     Override with environment variable: LS_STORAGE_PATH
-    Example: Path(r"D:\InvoiceStorage") or Path("/mnt/storage/invoices")
+    Example: Path(r"D:\\InvoiceStorage") or Path("/mnt/storage/invoices")
     Note: Must have write permissions
 
 PDF_DIR (Path):
@@ -259,7 +259,7 @@ Solution: Copy config_template.py to config_customer.py and fill values
 
 Problem: "Permission denied" when saving PDF
 Solution: Check STORAGE_BASE path exists and has write permissions
-    Windows: icacls C:\NEX_INVOICES /grant Users:F
+    Windows: icacls C:\\NEX_INVOICES /grant Users:F
     Linux: chmod 755 /opt/nex_invoices
 
 Problem: Email alerts not working
@@ -315,7 +315,7 @@ Example 2: Development/Testing:
 Example 3: Multi-location customer:
     CUSTOMER_NAME = "ANDROS_BA"
     CUSTOMER_FULL_NAME = "ANDROS Bratislava, s.r.o."
-    STORAGE_BASE = Path(r"D:\Invoices\ANDROS_BA")
+    STORAGE_BASE = Path(r"D:\\Invoices\ANDROS_BA")
     NEX_GENESIS_API_URL = "https://nex-ba.andros.sk/api"
 
 """

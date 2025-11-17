@@ -398,7 +398,7 @@ def get_metrics() -> Dict[str, Any]:
         'db_invoices_processed': db_stats.get('processed_count', 0),
         'db_invoices_pending': db_stats.get('pending_count', 0),
         'db_invoices_failed': db_stats.get('failed_count', 0),
-        'db_size_mb': database['db_size_mb'],
+        'db_size_mb': database.get('db_size_mb'),
 
         # Storage metrics
         'storage_disk_free_gb': storage['disk_free_gb'],

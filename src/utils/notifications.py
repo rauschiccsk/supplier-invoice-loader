@@ -523,6 +523,16 @@ def test_email_configuration() -> bool:
     return success
 
 
+def send_test_email() -> bool:
+    """
+    Alias for test_email_configuration() for backward compatibility
+
+    Returns:
+        True if test email sent successfully, False otherwise
+    """
+    return test_email_configuration()
+
+
 # ============================================================================
 # COMMAND LINE INTERFACE
 # ============================================================================

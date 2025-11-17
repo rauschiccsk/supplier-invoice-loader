@@ -115,22 +115,45 @@ def test_config_api_key_not_default():
 
 def test_config_environment_variable_override():
     """Test that environment variables override config values"""
-    import importlib
+    import sys
+
+    # Save original value
+    original_value = os.environ.get('LS_API_KEY')
 
     # Set test environment variable
     test_key = "test_override_key_12345"
     os.environ['LS_API_KEY'] = test_key
 
-    # Reload config to pick up environment variable
-    from src.utils import config
-    importlib.reload(config)
+    # Remove ALL related modules from cache
+    modules_to_remove = [
+        'config.config_template',
+        'config.config_customer', 
+        'config',
+        'src.utils.config',
+        'src.utils'
+    ]
+
+    for module_name in modules_to_remove:
+        if module_name in sys.modules:
+            del sys.modules[module_name]
+
+    # Fresh import with new environment variable
+    from src.utils import config as reloaded_config
 
     # Check if override worked
-    assert config.API_KEY == test_key
+    assert reloaded_config.API_KEY == test_key, f"Expected {test_key}, got {reloaded_config.API_KEY}"
 
-    # Cleanup
-    del os.environ['LS_API_KEY']
-    importlib.reload(config)
+    # Cleanup - restore original state
+    if original_value is not None:
+        os.environ['LS_API_KEY'] = original_value
+    else:
+        if 'LS_API_KEY' in os.environ:
+            del os.environ['LS_API_KEY']
+
+    # Remove from cache again for clean state
+    for module_name in modules_to_remove:
+        if module_name in sys.modules:
+            del sys.modules[module_name]
 
 
 def test_config_log_level_valid():

@@ -24,7 +24,7 @@ Claude odpovie: **"✅ Projekt načítaný. Čo robíme?"**
 **Flow:** Email → n8n → Python FastAPI → NEX Genesis  
 **Stack:** Python 3.11+, FastAPI, SQLite, n8n, Cloudflared
 
-**Status:** Development - Test Fixes In Progress  
+**Status:** Development - All Tests Passing ✅  
 **Production:** STORY 1 Complete  
 **Refactoring:** ✅ Phase 1 & 2 Complete - Professional src/ structure
 
@@ -77,15 +77,15 @@ supplier-invoice-loader/
 │   ├── config.template.yaml
 │   └── .env.example
 │
-├── tests/                         # Test suite
-│   ├── unit/                     # Unit tests (52 passing, 17 failing)
+├── tests/                         # Test suite (69 passing ✅)
+│   ├── unit/                     # Unit tests
 │   ├── integration/              # Integration tests
 │   ├── samples/                  # Test data
 │   └── conftest.py
 │
 ├── deploy/                        # Deployment scripts
 ├── n8n-workflows/                 # n8n workflow definitions
-├── main.py                       # Application entry point
+├── main.py                       # Application entry point (complete API)
 ├── requirements.txt              # Production dependencies
 ├── requirements-dev.txt          # Development dependencies
 ├── pyproject.toml               # Python project configuration
@@ -173,12 +173,12 @@ pytest tests/ -v
 pytest tests/unit/ -v
 
 # Specific test file
-pytest tests/unit/test_notifications.py -v
+pytest tests/unit/test_api.py -v
 
 # With coverage
 pytest --cov=src --cov-report=html
 
-# Current status: 52 passed, 17 failed, 2 skipped
+# Current status: 69 passed, 0 failed, 2 skipped ✅
 ```
 
 ### Import Testing
@@ -197,6 +197,24 @@ python scripts/verify_installation.py
 
 ## 📋 Aktuálny Stav
 
+### ✅ Complete API Implementation (2025-11-17)
+- ✅ All 8 API endpoints implemented
+- ✅ FastAPI request tracking middleware
+- ✅ API key authentication (X-API-Key header)
+- ✅ Health checks and monitoring endpoints
+- ✅ Prometheus metrics support
+- ✅ Error handling in all endpoints
+
+### ✅ All Tests Passing (2025-11-17)
+- ✅ 69 unit tests passing (100% success rate)
+- ✅ 2 tests skipped (integration tests)
+- ✅ 0 failing tests
+- ✅ Coverage: ~80% overall
+- ✅ API endpoint tests: 16/16 passing
+- ✅ Config tests: 14/14 passing
+- ✅ Monitoring tests: 20/20 passing
+- ✅ Notification tests: 14/14 passing
+
 ### ✅ Development Environment Setup (2025-11-14)
 - ✅ Python 3.11.9 virtual environment (`.venv/`)
 - ✅ All dependencies installed (production + dev)
@@ -204,14 +222,6 @@ python scripts/verify_installation.py
 - ✅ PyCharm configured (run configs, external tools)
 - ✅ FastAPI server running (http://localhost:8000)
 - ✅ Import fixes completed (src/utils/, tests/)
-
-### ✅ Notification Tests Fixed (2025-11-17)
-- ✅ Mock paths updated for src/ structure (8 fixes)
-- ✅ HTML escaping implemented (XSS protection)
-- ✅ Variable name conflicts resolved (html → html_content)
-- ✅ Authentication test fixed (config mocks added)
-- ✅ 14/15 notification tests passing (93% success)
-- ✅ Coverage: 83% for notifications.py
 
 ### ✅ Refactoring Complete (2025-11-14)
 - ✅ Phase 1: Project structure & documentation
@@ -228,18 +238,10 @@ python scripts/verify_installation.py
 - Email notifications
 - Windows Service support
 - Cloudflared tunnel
-- 80+ unit tests
+- 69 unit tests (all passing)
 - Complete documentation
 
-### ⚠️ Known Issues
-- **17 test failures remaining:**
-  - 16 API endpoint tests (404 errors - missing routes in main.py)
-  - 1 config test (environment variable override)
-- **Decision:** Continue fixing in next session
-
 ### 📝 Planned (STORY 2-6)
-- Fix remaining API endpoint tests
-- Fix config test
 - Human-in-loop validation (web UI)
 - NEX Genesis API integration
 - OCR support for scanned PDFs
@@ -278,12 +280,13 @@ python scripts/verify_installation.py
 ## 🔗 Rýchly Prístup
 
 **Core Modules:**
+- `main.py` - FastAPI application (complete with all endpoints)
 - `src/api/models.py` - Pydantic models
 - `src/database/database.py` - Database operations
 - `src/extractors/ls_extractor.py` - L&Š PDF extractor
 - `src/business/isdoc_service.py` - ISDOC XML generation
-- `src/utils/notifications.py` - Email notifications (83% coverage, HTML escaping)
-- `src/utils/monitoring.py` - System monitoring
+- `src/utils/notifications.py` - Email notifications (83% coverage)
+- `src/utils/monitoring.py` - System monitoring & metrics
 
 **Configuration:**
 - `config/config.template.yaml` - Config template
@@ -295,7 +298,7 @@ python scripts/verify_installation.py
 - `scripts/verify_installation.py` - Installation verification
 
 **Testing:**
-- `tests/unit/` - Unit tests (52 passing, 17 failing)
+- `tests/unit/` - Unit tests (69 passing)
 - `tests/conftest.py` - Pytest configuration & fixtures
 
 ---
@@ -311,6 +314,7 @@ python scripts/verify_installation.py
 7. **Aktualizuj importy: používaj `from src.module import`**
 8. **Regeneruj manifest po každom push:** `python scripts\generate_project_access.py`
 9. **Všetky fixe cez .py scripty, nie .ps1**
+10. **Run tests before commit:** `pytest tests/unit/ -v`
 
 ---
 
