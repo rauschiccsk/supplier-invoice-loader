@@ -6,6 +6,7 @@ Handles all email alerts and notifications
 
 import smtplib
 import logging
+import html
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
@@ -38,7 +39,12 @@ def _error_template(error_type: str, error_message: str, details: Dict[str, Any]
     timestamp = details.get('timestamp', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     stack_trace = details.get('stack_trace', '')
 
-    html = f"""
+    
+    # Escape HTML to prevent XSS
+    escaped_error_message = html.escape(error_message)
+    escaped_stack_trace = html.escape(stack_trace) if stack_trace else ''
+
+    html_content = f"""
     <html>
     <head>
         <style>
@@ -70,10 +76,10 @@ def _error_template(error_type: str, error_message: str, details: Dict[str, Any]
 
                 <h3>Error Message:</h3>
                 <div class="error-box">
-                    {error_message}
+                    {escaped_error_message}
                 </div>
 
-                {f'<h3>Stack Trace:</h3><div class="error-box">{stack_trace}</div>' if stack_trace else ''}
+                {f'<h3>Stack Trace:</h3><div class="error-box">{escaped_stack_trace}</div>' if stack_trace else ''}
 
                 <p style="margin-top: 20px;">
                     <strong>Action Required:</strong><br>
@@ -91,7 +97,7 @@ def _error_template(error_type: str, error_message: str, details: Dict[str, Any]
     </html>
     """
 
-    return html
+    return html_content
 
 
 def _validation_failed_template(invoice_data: Dict[str, Any], reason: str) -> str:
@@ -110,7 +116,11 @@ def _validation_failed_template(invoice_data: Dict[str, Any], reason: str) -> st
     subject = invoice_data.get('subject', 'N/A')
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    html = f"""
+    
+    # Escape HTML to prevent XSS
+    escaped_reason = html.escape(reason)
+
+    html_content = f"""
     <html>
     <head>
         <style>
@@ -141,7 +151,7 @@ def _validation_failed_template(invoice_data: Dict[str, Any], reason: str) -> st
 
                 <h3>Validation Failure Reason:</h3>
                 <p style="background-color: #fff3e0; padding: 15px; border-left: 4px solid #ff9800;">
-                    {reason}
+                    {escaped_reason}
                 </p>
 
                 <p style="margin-top: 20px;">
@@ -159,7 +169,7 @@ def _validation_failed_template(invoice_data: Dict[str, Any], reason: str) -> st
     </html>
     """
 
-    return html
+    return html_content
 
 
 def _daily_summary_template(stats: Dict[str, Any]) -> str:
@@ -197,7 +207,7 @@ def _daily_summary_template(stats: Dict[str, Any]) -> str:
         status_color = "#d32f2f"  # Red
         status_text = "Multiple failures detected"
 
-    html = f"""
+    html_content = f"""
     <html>
     <head>
         <style>
@@ -274,7 +284,7 @@ def _daily_summary_template(stats: Dict[str, Any]) -> str:
     </html>
     """
 
-    return html
+    return html_content
 
 
 # ============================================================================

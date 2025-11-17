@@ -78,7 +78,7 @@ def test_daily_summary_template_generates_html():
     assert '3' in html  # failed
 
 
-@patch('notifications.smtplib.SMTP')
+@patch('src.utils.notifications.smtplib.SMTP')
 def test_send_email_success(mock_smtp):
     """Test successful email sending"""
     from src.utils import notifications
@@ -102,7 +102,9 @@ def test_send_email_success(mock_smtp):
     mock_server.quit.assert_called_once()
 
 
-@patch('notifications.smtplib.SMTP')
+@patch('src.utils.notifications.config.SMTP_PASSWORD', 'test_password')
+@patch('src.utils.notifications.config.SMTP_USER', 'test@example.com')
+@patch('src.utils.notifications.smtplib.SMTP')
 def test_send_email_authentication_failure(mock_smtp):
     """Test email sending with authentication failure"""
     from src.utils import notifications
@@ -124,7 +126,7 @@ def test_send_email_authentication_failure(mock_smtp):
     assert result is False
 
 
-@patch('notifications.smtplib.SMTP')
+@patch('src.utils.notifications.smtplib.SMTP')
 def test_send_email_multiple_recipients(mock_smtp):
     """Test sending to multiple recipients"""
     from src.utils import notifications
@@ -143,7 +145,7 @@ def test_send_email_multiple_recipients(mock_smtp):
     mock_server.send_message.assert_called_once()
 
 
-@patch('notifications._send_email')
+@patch('src.utils.notifications._send_email')
 def test_send_alert_email(mock_send):
     """Test send_alert_email wrapper"""
     from src.utils import notifications
@@ -165,7 +167,7 @@ def test_send_alert_email(mock_send):
     assert '<html>' in call_args[0][2]  # html_body
 
 
-@patch('notifications._send_email')
+@patch('src.utils.notifications._send_email')
 def test_send_validation_failed_email(mock_send):
     """Test send_validation_failed_email wrapper"""
     from src.utils import notifications
@@ -181,8 +183,8 @@ def test_send_validation_failed_email(mock_send):
     mock_send.assert_called_once()
 
 
-@patch('notifications._send_email')
-@patch('notifications.database.get_stats')
+@patch('src.utils.notifications._send_email')
+@patch('src.database.database.get_stats')
 def test_send_daily_summary(mock_get_stats, mock_send):
     """Test send_daily_summary function"""
     from src.utils import notifications
@@ -227,7 +229,7 @@ def test_send_alert_email_requires_alert_email_config():
     config.ALERT_EMAIL = original_alert_email
 
 
-@patch('notifications._send_email')
+@patch('src.utils.notifications._send_email')
 def test_test_email_configuration(mock_send):
     """Test test_email_configuration function"""
     from src.utils import notifications
@@ -248,7 +250,7 @@ def test_send_alert_adds_timestamp_if_missing():
     """Test that send_alert_email adds timestamp if not provided"""
     from src.utils import notifications
 
-    with patch('notifications._send_email') as mock_send:
+    with patch('src.utils.notifications._send_email') as mock_send:
         mock_send.return_value = True
 
         # Call without timestamp in details
