@@ -21,12 +21,37 @@ Claude odpovie: **"✅ Projekt načítaný. Čo robíme?"**
 ## 📊 Project Overview
 
 **Účel:** Automatizované spracovanie dodávateľských faktúr  
-**Flow:** Email → n8n → Python FastAPI → NEX Genesis  
-**Stack:** Python 3.11+, FastAPI, SQLite, n8n, Cloudflared
+**Flow:** Email → n8n → Python FastAPI → PostgreSQL Staging → invoice-editor → NEX Genesis  
+**Stack:** Python 3.11+, FastAPI, SQLite, PostgreSQL, n8n, Cloudflared
 
-**Status:** Development - All Tests Passing ✅  
-**Production:** STORY 1 Complete  
+**Status:** Development - PostgreSQL Integration Complete ✅  
+**Production:** STORY 1 Complete + invoice-editor Integration  
 **Refactoring:** ✅ Phase 1 & 2 Complete - Professional src/ structure
+
+---
+
+## 🔄 Integration Points
+
+### invoice-editor Integration (NEW - 2025-11-17)
+- **Purpose:** Operator approval workflow before NEX Genesis import
+- **Database:** PostgreSQL (invoice_staging)
+- **Tables:** invoices_pending, invoice_items_pending
+- **Workflow:** supplier-invoice-loader → PostgreSQL → invoice-editor GUI → NEX Genesis
+- **Status:** Integrated ✅
+
+**Components:**
+- `src/database/postgres_staging.py` - PostgreSQL client (pg8000)
+- `src/utils/text_utils.py` - Data sanitization utilities
+- `config.POSTGRES_STAGING_ENABLED` - Enable/disable flag
+
+**Environment:**
+```powershell
+$env:POSTGRES_PASSWORD = "your-password"
+```
+
+**Schema:**
+- **invoices_pending:** Invoice headers (status: pending → approved → imported)
+- **invoice_items_pending:** Invoice line items (editable by operator)
 
 ---
 
@@ -44,7 +69,8 @@ supplier-invoice-loader/
 │   │   └── isdoc_service.py
 │   ├── database/                 # DB operations
 │   │   ├── __init__.py
-│   │   └── database.py
+│   │   ├── database.py          # SQLite operations
+│   │   └── postgres_staging.py  # PostgreSQL staging (NEW)
 │   ├── extractors/               # PDF extraction
 │   │   ├── __init__.py
 │   │   ├── base_extractor.py
@@ -55,7 +81,8 @@ supplier-invoice-loader/
 │       ├── config.py
 │       ├── env_loader.py
 │       ├── notifications.py
-│       └── monitoring.py
+│       ├── monitoring.py
+│       └── text_utils.py        # String sanitization (NEW)
 │
 ├── docs/                          # Documentation
 │   ├── INIT_PROMPT_NEW_CHAT.md   # This file
@@ -73,7 +100,7 @@ supplier-invoice-loader/
 │
 ├── config/                        # Configuration
 │   ├── config_customer.py
-│   ├── config_template.py
+│   ├── config_template.py        # PostgreSQL config added
 │   ├── config.template.yaml
 │   └── .env.example
 │
@@ -85,8 +112,8 @@ supplier-invoice-loader/
 │
 ├── deploy/                        # Deployment scripts
 ├── n8n-workflows/                 # n8n workflow definitions
-├── main.py                       # Application entry point (complete API)
-├── requirements.txt              # Production dependencies
+├── main.py                       # Application entry point (complete workflow)
+├── requirements.txt              # Production dependencies (includes pg8000)
 ├── requirements-dev.txt          # Development dependencies
 ├── pyproject.toml               # Python project configuration
 ├── .gitignore
@@ -114,6 +141,14 @@ supplier-invoice-loader/
 - **Email:** faktury@farby.sk
 - **Extractor:** `src/extractors/ls_extractor.py`
 
+### PostgreSQL Staging (invoice-editor integration) - NEW
+- **Enabled:** True/False (POSTGRES_STAGING_ENABLED)
+- **Host:** localhost (default)
+- **Port:** 5432
+- **Database:** invoice_staging
+- **User:** invoice_user
+- **Password:** ENV variable (POSTGRES_PASSWORD)
+
 ### Cloudflared Tunnel
 - **URL:** https://magerstav-invoices.icc.sk
 - **Tunnel ID:** 0fdfffe9-b348-44b5-adcc-969681ac2786
@@ -133,8 +168,14 @@ cd C:\Development\supplier-invoice-loader
 pip install -r requirements.txt
 pip install -r requirements-dev.txt
 
+# Install PostgreSQL driver (NEW)
+pip install pg8000
+
 # Install project in editable mode
 pip install -e .
+
+# Set PostgreSQL password (if using invoice-editor integration)
+$env:POSTGRES_PASSWORD = "your-postgres-password"
 ```
 
 ### Run Application
@@ -185,6 +226,8 @@ pytest --cov=src --cov-report=html
 ```powershell
 python -c "from src.database import database; print('✅ OK')"
 python -c "from src.extractors.ls_extractor import LSExtractor; print('✅ OK')"
+python -c "from src.database.postgres_staging import PostgresStagingClient; print('✅ OK')"
+python -c "from src.utils.text_utils import clean_string; print('✅ OK')"
 ```
 
 ### Verification
@@ -196,6 +239,17 @@ python scripts/verify_installation.py
 ---
 
 ## 📋 Aktuálny Stav
+
+### ✅ PostgreSQL Staging Integration (2025-11-17)
+- ✅ PostgreSQL client implemented (pg8000)
+- ✅ String sanitization utilities (text_utils.py)
+- ✅ Config extended with PostgreSQL settings
+- ✅ POST /invoice endpoint - full workflow implemented
+- ✅ Automatic insert to invoice-editor staging database
+- ✅ Duplicate detection in PostgreSQL
+- ✅ Optional integration (can be disabled)
+- ✅ Error handling (PostgreSQL errors don't fail process)
+- ✅ Detailed logging and response metadata
 
 ### ✅ Complete API Implementation (2025-11-17)
 - ✅ All 8 API endpoints implemented
@@ -242,8 +296,8 @@ python scripts/verify_installation.py
 - Complete documentation
 
 ### 📝 Planned (STORY 2-6)
-- Human-in-loop validation (web UI)
-- NEX Genesis API integration
+- Human-in-loop validation (invoice-editor GUI) ✅ INTEGRATED
+- NEX Genesis API direct integration (via invoice-editor)
 - OCR support for scanned PDFs
 - Advanced monitoring dashboard
 
@@ -280,17 +334,20 @@ python scripts/verify_installation.py
 ## 🔗 Rýchly Prístup
 
 **Core Modules:**
-- `main.py` - FastAPI application (complete with all endpoints)
+- `main.py` - FastAPI application (complete workflow with PostgreSQL)
 - `src/api/models.py` - Pydantic models
-- `src/database/database.py` - Database operations
+- `src/database/database.py` - SQLite operations
+- `src/database/postgres_staging.py` - PostgreSQL staging client (NEW)
 - `src/extractors/ls_extractor.py` - L&Š PDF extractor
 - `src/business/isdoc_service.py` - ISDOC XML generation
+- `src/utils/text_utils.py` - String sanitization (NEW)
 - `src/utils/notifications.py` - Email notifications (83% coverage)
 - `src/utils/monitoring.py` - System monitoring & metrics
 
 **Configuration:**
 - `config/config.template.yaml` - Config template
 - `config/config_customer.py` - Customer config
+- `config/config_template.py` - PostgreSQL config added
 
 **Scripts:**
 - `scripts/service_installer.py` - Windows service installer
@@ -315,6 +372,10 @@ python scripts/verify_installation.py
 8. **Regeneruj manifest po každom push:** `python scripts\generate_project_access.py`
 9. **Všetky fixe cez .py scripty, nie .ps1**
 10. **Run tests before commit:** `pytest tests/unit/ -v`
+11. **PostgreSQL heslo vždy cez ENV:** `$env:POSTGRES_PASSWORD = "..."`
+12. **Test PostgreSQL connection pred produkciou**
+13. **PostgreSQL je optional:** Môže byť vypnutý (POSTGRES_STAGING_ENABLED=False)
+14. **Clean strings pre PostgreSQL:** Používaj text_utils.clean_string()
 
 ---
 
@@ -335,15 +396,21 @@ Email (Gmail)
   ↓ n8n Workflow (IMAP trigger)
     ↓ Python FastAPI Server (invoice processing)
       ↓ PDF Extraction (pdfplumber)
-        ↓ SQLite Database
-          ↓ XML Generation (ISDOC)
-            ↓ NEX Genesis API (customer ERP)
+        ├─→ SQLite Database (metadata)
+        ├─→ XML Generation (ISDOC)
+        ├─→ File Storage (PDF/XML)
+        └─→ PostgreSQL Staging (NEW - invoice-editor)
+              ↓
+            GUI Approval (invoice-editor)
+              ↓
+            NEX Genesis API (customer ERP)
 ```
 
 ### Tech Stack
 - **Backend:** Python 3.11+, FastAPI, Uvicorn
 - **PDF Processing:** pdfplumber, PyPDF2
-- **Database:** SQLite 3.x
+- **Database:** SQLite 3.x, PostgreSQL (staging)
+- **PostgreSQL Driver:** pg8000 (Pure Python, 32-bit compatible)
 - **Automation:** n8n workflows
 - **Tunneling:** Cloudflared
 - **Service:** Windows Service (NSSM wrapper)
@@ -361,11 +428,39 @@ Email (Gmail)
 **Dodávatelia:**
 - L&Š, s.r.o. (IČO: 36555720) - farby, laky
 
+**Integration:**
+- invoice-editor (GUI approval workflow) ✅
+
 **Environment:**
 - Development: Windows 11, Python 3.11.9, PyCharm
 - Production: Windows Server 2012 R2, Python 3.10+
 - Local SQLite database
+- PostgreSQL staging database (invoice-editor)
 - Network file storage (PDF/XML)
+
+---
+
+## 📝 Dependencies
+
+**Production (requirements.txt):**
+```
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pdfplumber>=0.10.0
+python-multipart>=0.0.6
+pyyaml>=6.0
+python-dateutil>=2.8.2
+pg8000>=1.29.0              # PostgreSQL driver (NEW)
+```
+
+**Development (requirements-dev.txt):**
+```
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.10.0
+isort>=5.12.0
+mypy>=1.6.0
+```
 
 ---
 

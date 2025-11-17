@@ -173,6 +173,7 @@ Required in production:
     LS_API_KEY          - API key for FastAPI endpoints
     SMTP_USER           - SMTP username for email alerts
     SMTP_PASSWORD       - SMTP password for email alerts
+    POSTGRES_PASSWORD   - PostgreSQL password for staging database (if enabled)
 
 Optional:
     LS_STORAGE_PATH     - Override default storage location
@@ -346,6 +347,45 @@ ALERT_EMAIL = "support@icc.sk"
 SEND_DAILY_SUMMARY = True
 HEARTBEAT_ENABLED = True
 
+
+
+POSTGRESQL STAGING CONFIGURATION (for invoice-editor integration):
+------------------------------------------------------------------
+
+POSTGRES_STAGING_ENABLED (bool):
+    Enable/disable PostgreSQL staging database integration
+    If True: Invoices are saved to PostgreSQL for invoice-editor approval
+    If False: Only SQLite database and file storage (legacy mode)
+    Default: True
+    Example: True
+
+POSTGRES_HOST (str):
+    PostgreSQL server hostname or IP address
+    Default: "localhost"
+    Example: "localhost"
+
+POSTGRES_PORT (int):
+    PostgreSQL server port
+    Default: 5432 (standard PostgreSQL port)
+    Example: 5432
+
+POSTGRES_DATABASE (str):
+    PostgreSQL database name
+    Default: "invoice_staging"
+    Example: "invoice_staging"
+
+POSTGRES_USER (str):
+    PostgreSQL username for connection
+    Default: "invoice_user"
+    Example: "invoice_user"
+
+POSTGRES_PASSWORD (str):
+    PostgreSQL user password
+    Default: from environment variable POSTGRES_PASSWORD
+    Security: NEVER hardcode! Use environment variables
+    Example: os.getenv("POSTGRES_PASSWORD", "")
+
+
 # ============================================================================
 # GENERIC CONFIGURATION - DO NOT CHANGE (unless you know what you're doing)
 # ============================================================================
@@ -378,3 +418,17 @@ SMTP_PORT = 587
 SMTP_USER = os.getenv("SMTP_USER", "")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
 SMTP_FROM = "noreply@icc.sk"
+
+# ============================================================================
+# POSTGRESQL STAGING CONFIGURATION (invoice-editor integration)
+# ============================================================================
+
+# Enable PostgreSQL staging database integration
+POSTGRES_STAGING_ENABLED = True  # Set False to disable invoice-editor integration
+
+# PostgreSQL connection settings
+POSTGRES_HOST = "localhost"
+POSTGRES_PORT = 5432
+POSTGRES_DATABASE = "invoice_staging"
+POSTGRES_USER = "invoice_user"
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "")
