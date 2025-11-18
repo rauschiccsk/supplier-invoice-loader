@@ -445,6 +445,72 @@ def get_customer_list() -> List[str]:
     return customers
 
 
+
+
+def save_invoice(
+        customer_name: str,
+        invoice_number: str,
+        invoice_date: str,
+        total_amount: float,
+        file_path: str,
+        file_hash: str,
+        status: str = "received",
+        message_id: Optional[str] = None,
+        gmail_id: Optional[str] = None
+) -> int:
+    """
+    Save invoice to database (simplified wrapper for insert_invoice)
+
+    Args:
+        customer_name: Customer name
+        invoice_number: Invoice number
+        invoice_date: Invoice date
+        total_amount: Total amount
+        file_path: Path to PDF file
+        file_hash: File hash
+        status: Invoice status
+        message_id: Email message ID
+        gmail_id: Gmail ID
+
+    Returns:
+        Invoice ID
+    """
+    # Insert invoice
+    invoice_id = insert_invoice(
+        file_hash=file_hash,
+        pdf_path=file_path,
+        original_filename=Path(file_path).name,
+        message_id=message_id,
+        gmail_id=gmail_id,
+        customer_name=customer_name
+    )
+
+    # Update with extracted data
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE invoices SET
+            invoice_number = ?,
+            issue_date = ?,
+            total_amount = ?,
+            status = ?
+        WHERE id = ?
+    """, (
+        invoice_number,
+        invoice_date,
+        total_amount,
+        status,
+        invoice_id
+    ))
+
+    conn.commit()
+    conn.close()
+
+    logger.info(f"Invoice saved: ID={invoice_id}, number={invoice_number}, amount={total_amount}")
+    return invoice_id
+
+
 # Backward compatibility - keep old function signatures working
 def get_all_invoices_legacy(limit: int = 100) -> List[Dict]:
     """Legacy function for backward compatibility"""

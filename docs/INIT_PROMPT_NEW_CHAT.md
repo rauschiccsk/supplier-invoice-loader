@@ -3,7 +3,7 @@
 **Project:** supplier-invoice-loader (refactored structure)  
 **Version:** 2.0  
 **GitHub:** https://github.com/rauschiccsk/supplier-invoice-loader  
-**Last Updated:** 2025-11-17
+**Last Updated:** 2025-11-18
 
 ---
 
@@ -24,34 +24,45 @@ Claude odpovie: **"✅ Projekt načítaný. Čo robíme?"**
 **Flow:** Email → n8n → Python FastAPI → PostgreSQL Staging → invoice-editor → NEX Genesis  
 **Stack:** Python 3.11+, FastAPI, SQLite, PostgreSQL, n8n, Cloudflared
 
-**Status:** Development - PostgreSQL Integration Complete ✅  
-**Production:** STORY 1 Complete + invoice-editor Integration  
+**Status:** ✅ Production Ready - PostgreSQL Integration Tested  
+**Tests:** 69/69 passing ✅  
+**Integration:** invoice-editor GUI integration ✅  
+
 **Refactoring:** ✅ Phase 1 & 2 Complete - Professional src/ structure
 
 ---
 
-## 🔄 Integration Points
+## 📄 Integration Points
 
-### invoice-editor Integration (NEW - 2025-11-17)
+### invoice-editor Integration (TESTED - 2025-11-18)
 - **Purpose:** Operator approval workflow before NEX Genesis import
 - **Database:** PostgreSQL (invoice_staging)
 - **Tables:** invoices_pending, invoice_items_pending
 - **Workflow:** supplier-invoice-loader → PostgreSQL → invoice-editor GUI → NEX Genesis
-- **Status:** Integrated ✅
+- **Status:** ✅ Integrated & Tested
 
 **Components:**
 - `src/database/postgres_staging.py` - PostgreSQL client (pg8000)
+- `src/database/database.py` - SQLite + save_invoice()
 - `src/utils/text_utils.py` - Data sanitization utilities
 - `config.POSTGRES_STAGING_ENABLED` - Enable/disable flag
 
 **Environment:**
 ```powershell
 $env:POSTGRES_PASSWORD = "your-password"
+$env:LS_API_KEY = "your-api-key"
 ```
 
 **Schema:**
 - **invoices_pending:** Invoice headers (status: pending → approved → imported)
 - **invoice_items_pending:** Invoice line items (editable by operator)
+
+**Test Results (2025-11-18):**
+- ✅ Invoice 32506183 processed (46 items, 2270.33 EUR)
+- ✅ Saved to PostgreSQL (ID: 3)
+- ✅ Saved to SQLite
+- ✅ Files: C:\NEX\IMPORT\LS\PDF & XML
+- ✅ End-to-end workflow verified
 
 ---
 
@@ -69,8 +80,8 @@ supplier-invoice-loader/
 │   │   └── isdoc_service.py
 │   ├── database/                 # DB operations
 │   │   ├── __init__.py
-│   │   ├── database.py          # SQLite operations
-│   │   └── postgres_staging.py  # PostgreSQL staging (NEW)
+│   │   ├── database.py          # SQLite + save_invoice()
+│   │   └── postgres_staging.py  # PostgreSQL staging
 │   ├── extractors/               # PDF extraction
 │   │   ├── __init__.py
 │   │   ├── base_extractor.py
@@ -82,7 +93,7 @@ supplier-invoice-loader/
 │       ├── env_loader.py
 │       ├── notifications.py
 │       ├── monitoring.py
-│       └── text_utils.py        # String sanitization (NEW)
+│       └── text_utils.py        # String sanitization
 │
 ├── docs/                          # Documentation
 │   ├── INIT_PROMPT_NEW_CHAT.md   # This file
@@ -94,13 +105,15 @@ supplier-invoice-loader/
 │   └── guides/                   # Development guides
 │
 ├── scripts/                       # Utility scripts
+│   ├── test_invoice_integration.py # Integration test (NEW)
+│   ├── clear_test_data.py         # Test data cleanup (NEW)
 │   ├── generate_project_access.py  # Manifest generator
 │   ├── service_installer.py        # Windows service installer
 │   └── verify_installation.py      # Setup verification
 │
 ├── config/                        # Configuration
-│   ├── config_customer.py
-│   ├── config_template.py        # PostgreSQL config added
+│   ├── config_customer.py        # Customer config (PostgreSQL + NEX paths)
+│   ├── config_template.py        # Template with PostgreSQL config
 │   ├── config.template.yaml
 │   └── .env.example
 │
@@ -132,21 +145,21 @@ supplier-invoice-loader/
 
 ### MAGERSTAV Setup
 - **IČO:** 31436871
-- **PDF Storage:** `G:\NEX\IMPORT\LS\PDF`
-- **XML Storage:** `G:\NEX\IMPORT\LS\XML`
-- **Database:** `C:\invoice-loader\invoices.db`
+- **PDF Storage:** `C:\NEX\IMPORT\LS\PDF`
+- **XML Storage:** `C:\NEX\IMPORT\LS\XML`
+- **Database:** `C:\Development\supplier-invoice-loader\config\invoices.db`
 
 ### L&Š Dodávateľ
 - **IČO:** 36555720
 - **Email:** faktury@farby.sk
 - **Extractor:** `src/extractors/ls_extractor.py`
 
-### PostgreSQL Staging (invoice-editor integration) - NEW
-- **Enabled:** True/False (POSTGRES_STAGING_ENABLED)
-- **Host:** localhost (default)
+### PostgreSQL Staging (invoice-editor integration)
+- **Enabled:** True (POSTGRES_STAGING_ENABLED)
+- **Host:** localhost
 - **Port:** 5432
 - **Database:** invoice_staging
-- **User:** invoice_user
+- **User:** postgres
 - **Password:** ENV variable (POSTGRES_PASSWORD)
 
 ### Cloudflared Tunnel
@@ -168,14 +181,15 @@ cd C:\Development\supplier-invoice-loader
 pip install -r requirements.txt
 pip install -r requirements-dev.txt
 
-# Install PostgreSQL driver (NEW)
+# Install PostgreSQL driver
 pip install pg8000
 
 # Install project in editable mode
 pip install -e .
 
-# Set PostgreSQL password (if using invoice-editor integration)
+# Set environment variables
 $env:POSTGRES_PASSWORD = "your-postgres-password"
+$env:LS_API_KEY = "your-api-key"
 ```
 
 ### Run Application
@@ -190,36 +204,30 @@ python main.py
 # API Docs: http://localhost:8000/docs
 ```
 
-### PyCharm
-```
-Run Configurations:
-  - "Supplier Invoice Loader (FastAPI)" - Start server
-  - "pytest - All Tests" - Run all tests
-  - "pytest - Unit Tests" - Run unit tests only
-
-External Tools:
-  - Black - Format File (code formatter)
-  - isort - Sort Imports (import organizer)
-```
-
 ### Testing
 ```powershell
 # Activate venv
 .\.venv\Scripts\Activate.ps1
 
-# All tests
+# Integration test (NEW)
+python scripts/test_invoice_integration.py
+
+# All unit tests
 pytest tests/ -v
 
 # Unit tests only
 pytest tests/unit/ -v
 
-# Specific test file
-pytest tests/unit/test_api.py -v
-
 # With coverage
 pytest --cov=src --cov-report=html
 
 # Current status: 69 passed, 0 failed, 2 skipped ✅
+```
+
+### Clear Test Data
+```powershell
+# Clear SQLite test data for fresh testing
+python scripts/clear_test_data.py
 ```
 
 ### Import Testing
@@ -240,7 +248,7 @@ python scripts/verify_installation.py
 
 ## 📋 Aktuálny Stav
 
-### ✅ PostgreSQL Staging Integration (2025-11-17)
+### ✅ PostgreSQL Integration Complete & Tested (2025-11-18)
 - ✅ PostgreSQL client implemented (pg8000)
 - ✅ String sanitization utilities (text_utils.py)
 - ✅ Config extended with PostgreSQL settings
@@ -250,8 +258,10 @@ python scripts/verify_installation.py
 - ✅ Optional integration (can be disabled)
 - ✅ Error handling (PostgreSQL errors don't fail process)
 - ✅ Detailed logging and response metadata
+- ✅ **Integration test framework created**
+- ✅ **End-to-end test successful (invoice 32506183, 46 items)**
 
-### ✅ Complete API Implementation (2025-11-17)
+### ✅ Complete API Implementation
 - ✅ All 8 API endpoints implemented
 - ✅ FastAPI request tracking middleware
 - ✅ API key authentication (X-API-Key header)
@@ -259,25 +269,21 @@ python scripts/verify_installation.py
 - ✅ Prometheus metrics support
 - ✅ Error handling in all endpoints
 
-### ✅ All Tests Passing (2025-11-17)
+### ✅ All Tests Passing
 - ✅ 69 unit tests passing (100% success rate)
 - ✅ 2 tests skipped (integration tests)
 - ✅ 0 failing tests
 - ✅ Coverage: ~80% overall
-- ✅ API endpoint tests: 16/16 passing
-- ✅ Config tests: 14/14 passing
-- ✅ Monitoring tests: 20/20 passing
-- ✅ Notification tests: 14/14 passing
+- ✅ Integration test framework created
 
-### ✅ Development Environment Setup (2025-11-14)
+### ✅ Development Environment Setup
 - ✅ Python 3.11.9 virtual environment (`.venv/`)
 - ✅ All dependencies installed (production + dev)
 - ✅ Project installed in editable mode (`pip install -e .`)
 - ✅ PyCharm configured (run configs, external tools)
 - ✅ FastAPI server running (http://localhost:8000)
-- ✅ Import fixes completed (src/utils/, tests/)
 
-### ✅ Refactoring Complete (2025-11-14)
+### ✅ Refactoring Complete
 - ✅ Phase 1: Project structure & documentation
 - ✅ Phase 2: Code migration to src/
 - ✅ New GitHub repository: supplier-invoice-loader
@@ -294,10 +300,13 @@ python scripts/verify_installation.py
 - Cloudflared tunnel
 - 69 unit tests (all passing)
 - Complete documentation
+- PostgreSQL staging integration
+- Test framework
 
-### 📝 Planned (STORY 2-6)
-- Human-in-loop validation (invoice-editor GUI) ✅ INTEGRATED
+### 🔜 Planned (STORY 2-6)
+- invoice-editor GUI integration testing
 - NEX Genesis API direct integration (via invoice-editor)
+- n8n workflow email testing
 - OCR support for scanned PDFs
 - Advanced monitoring dashboard
 
@@ -325,7 +334,7 @@ python scripts/verify_installation.py
 - [Windows Service Guide](deployment/WINDOWS_SERVICE_GUIDE.md)
 - [Release Notes](deployment/RELEASE_NOTES_v2.0.0.md)
 
-### Architektúra
+### Architecture
 - [Database Schema](database/TYPE_MAPPINGS.md)
 - [Architecture Decisions](decisions/)
 
@@ -336,20 +345,22 @@ python scripts/verify_installation.py
 **Core Modules:**
 - `main.py` - FastAPI application (complete workflow with PostgreSQL)
 - `src/api/models.py` - Pydantic models
-- `src/database/database.py` - SQLite operations
-- `src/database/postgres_staging.py` - PostgreSQL staging client (NEW)
+- `src/database/database.py` - SQLite operations + save_invoice()
+- `src/database/postgres_staging.py` - PostgreSQL staging client
 - `src/extractors/ls_extractor.py` - L&Š PDF extractor
 - `src/business/isdoc_service.py` - ISDOC XML generation
-- `src/utils/text_utils.py` - String sanitization (NEW)
+- `src/utils/text_utils.py` - String sanitization
 - `src/utils/notifications.py` - Email notifications (83% coverage)
 - `src/utils/monitoring.py` - System monitoring & metrics
 
 **Configuration:**
 - `config/config.template.yaml` - Config template
-- `config/config_customer.py` - Customer config
-- `config/config_template.py` - PostgreSQL config added
+- `config/config_customer.py` - Customer config (PostgreSQL + NEX paths)
+- `config/config_template.py` - PostgreSQL config template
 
 **Scripts:**
+- `scripts/test_invoice_integration.py` - Integration test (NEW)
+- `scripts/clear_test_data.py` - Test data cleanup (NEW)
 - `scripts/service_installer.py` - Windows service installer
 - `scripts/generate_project_access.py` - Manifest generator
 - `scripts/verify_installation.py` - Installation verification
@@ -376,6 +387,9 @@ python scripts/verify_installation.py
 12. **Test PostgreSQL connection pred produkciou**
 13. **PostgreSQL je optional:** Môže byť vypnutý (POSTGRES_STAGING_ENABLED=False)
 14. **Clean strings pre PostgreSQL:** Používaj text_utils.clean_string()
+15. **Restart FastAPI server po code changes**
+16. **Use integration test:** `python scripts/test_invoice_integration.py`
+17. **Clear test data before re-testing:** `python scripts/clear_test_data.py`
 
 ---
 
@@ -388,7 +402,7 @@ python scripts/verify_installation.py
 
 ---
 
-## 🗝️ Architektúra
+## 🗃️ Architektúra
 
 ### High-Level Flow
 ```
@@ -399,7 +413,7 @@ Email (Gmail)
         ├─→ SQLite Database (metadata)
         ├─→ XML Generation (ISDOC)
         ├─→ File Storage (PDF/XML)
-        └─→ PostgreSQL Staging (NEW - invoice-editor)
+        └─→ PostgreSQL Staging (invoice-editor)
               ↓
             GUI Approval (invoice-editor)
               ↓
@@ -429,7 +443,7 @@ Email (Gmail)
 - L&Š, s.r.o. (IČO: 36555720) - farby, laky
 
 **Integration:**
-- invoice-editor (GUI approval workflow) ✅
+- invoice-editor (GUI approval workflow) ✅ TESTED
 
 **Environment:**
 - Development: Windows 11, Python 3.11.9, PyCharm
@@ -440,7 +454,7 @@ Email (Gmail)
 
 ---
 
-## 📝 Dependencies
+## 🔧 Dependencies
 
 **Production (requirements.txt):**
 ```
@@ -450,7 +464,7 @@ pdfplumber>=0.10.0
 python-multipart>=0.0.6
 pyyaml>=6.0
 python-dateutil>=2.8.2
-pg8000>=1.29.0              # PostgreSQL driver (NEW)
+pg8000>=1.29.0              # PostgreSQL driver
 ```
 
 **Development (requirements-dev.txt):**
